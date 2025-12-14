@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:04:18 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/05 23:10:36 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 12:27:01 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_itoa_buffer(int n, char *buf)
 		while (*min)
 			*buf++ = *min++;
 		*buf = '\0';
-		return;
+		return ;
 	}
 	n = count_digits(n, &sign, &count);
 	if (sign < 0)
