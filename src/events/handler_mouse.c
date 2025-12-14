@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 04:18:38 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 19:10:06 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 13:36:02 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,46 +31,18 @@ void	process_zoom(t_fract *fract, double zoom_factor, int x, int y)
 	render(fract);
 }
 
-static int	calc_fract_coordinates(int x, int y, t_fract *fract)
+static void	calc_fract_coordinates(int x, int y, t_fract *fract)
 {
 	double	coord_x_scaled;
 	double	coord_y_scaled;
 
+	if (fract->fract_mode == E_JULIA)
+		return ;
 	coord_x_scaled = (double)x * fract->scl.sfw + fract->scl.offsetw;
 	coord_y_scaled = (double)y * fract->scl.sfh + fract->scl.offseth;
 	fract->julia_r = fract->sftx + coord_x_scaled * fract->zoom;
 	fract->julia_i = fract->sfty + coord_y_scaled * fract->zoom;
-	return (0);
 }
-
-// static int	calc_fract_coordinates(int x, int y, t_fract *fract)
-// {
-// 	double	coord_x_scaled;
-// 	double	coord_y_scaled;
-// 	double	c_r;
-// 	double	c_i;
-
-// 	// 1. Calculate the base scaled coordinate (un-shifted, un-zoomed position)
-// 	// This is the "coord_x" / "coord_y" calculation from your process_zoom
-
-// 	// For Real part (x-coordinate):
-// 	coord_x_scaled = (double)x * fract->scl.sfw + fract->scl.offsetw;
-
-// 	// For Imaginary part (y-coordinate):
-// 	coord_y_scaled = (double)y * fract->scl.sfh + fract->scl.offseth;
-
-// 	// 2. Apply the current shift (sftx/sfty) and zoom factor
-// 	// This completes the transformation, matching the formula
-// 	// used to render the fractal.
-
-// 	c_r = fract->sftx + coord_x_scaled * fract->zoom;
-// 	c_i = fract->sfty + coord_y_scaled * fract->zoom;
-
-// 	printf("C_r: %f\n", c_r);
-// 	printf("C_i: %f\n", c_i);
-
-// 	return (0);
-// }
 
 /*
  * Button4 (scroll-up)   -> Zoom in
@@ -124,6 +96,11 @@ int	mouse_motion_handler(int x, int y, t_fract *fract)
 		fract->last_x = x;
 		fract->last_y = y;
 		render(fract);
+	}
+	else
+	{
+		calc_fract_coordinates(x, y, fract);
+		draw_julia_coords(fract);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 21:44:25 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 20:57:25 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 13:21:02 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,7 @@ void	draw_help_panel(t_fract *fract);
 void	switch_fractals(int keysym, t_fract *fract);
 void	revert_dp(t_fract *fract);
 void	draw_dp(t_fract *fract);
+void	init_text(t_fract *fract);
+void	draw_julia_coords(t_fract *fract);
 
 #endif /* FRACTOL_H */

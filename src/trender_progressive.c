@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 18:33:12 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 14:26:24 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	trender_progressive(t_fract *fract)
 	if (fract->ren.pass_pix_idx == 0 && fract->ren.cur_s_idx == 0)
 		atomic_store(&fract->ren.comp_blocks, 0);
 	atomic_store(&fract->time.timeout_flag, 0);
+	revert_dp(fract);
 	pthread_mutex_lock(&fract->threads.pool_mutex);
 	fract->threads.threads_done_cnt = 0;
 	fract->threads.work_ready = 1;
@@ -118,6 +119,7 @@ void	trender_progressive(t_fract *fract)
 			&fract->threads.pool_mutex);
 	fract->threads.work_ready = 0;
 	pthread_mutex_unlock(&fract->threads.pool_mutex);
+	draw_dp(fract);
 	mlx_put_image_to_window(fract->mlx, fract->mlx_win, fract->img.img, 0, 0);
 	fract->ren.ren_time += timing_read_current_s(&t);
 	draw_render_info(fract);

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:10:20 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 21:02:15 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 13:11:23 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static inline void	draw_rendtime_info(t_fract *fract, int percentage)
 	if (percentage == 100)
 	{
 		ft_memmove(fract->text.render_time, INFO_RENDER, 13);
-		ft_ftoa_buffer(fract->ren.ren_time, &fract->text.render_time[12], 2);
+		ft_ftoa_buffer(fract->ren.ren_time,
+			&fract->text.render_time[FIX_S_INFO_RENDER], 2);
 		i = 0;
 		while (fract->text.render_time[i++])
 		{
@@ -70,9 +71,8 @@ static inline void	draw_rendtime_info(t_fract *fract, int percentage)
 
 static inline void	draw_treads_info(t_fract *fract)
 {
-	ft_memmove(fract->text.thread_count, INFO_THREADS, 16);
 	if (fract->threads.is_multithread == 0)
-		ft_itoa_buffer(1, &fract->text.thread_count[15]);
+		ft_itoa_buffer(1, &fract->text.thread_count[FIX_S_INFO_THREADS]);
 	else
 		ft_itoa_buffer(fract->threads.num_active_threads,
 			&fract->text.thread_count[15]);
@@ -97,8 +97,8 @@ void	draw_render_info(t_fract *fract)
 	// dp.height = fract->pad.panel_l_height;
 	// darken_square(fract, &dp);
 
-	
 	draw_perc_info(fract, &percentage);
 	draw_rendtime_info(fract, percentage);
 	draw_treads_info (fract);
+	draw_julia_coords(fract);
 }

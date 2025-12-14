@@ -6,7 +6,7 @@
 #    By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 21:58:38 by guillsan          #+#    #+#              #
-#    Updated: 2025/12/13 21:02:53 by guillsan         ###   ########.fr        #
+#    Updated: 2025/12/14 14:30:12 by guillsan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,29 +17,32 @@ CFLAGS = -O3 -Wall -Wextra -Werror
 
 SRCS_DIR = src
 SRCS_EVENTS_DIR = $(SRCS_DIR)/events
+SRCS_DRAW_DIR = $(SRCS_DIR)/draw
 
 SRCS_SRC = $(addprefix $(SRCS_DIR)/,            \
 				init.c                          \
 				parser.c                        \
 				render.c                        \
 				log.c                           \
-				draw_text.c                     \
-				draw_help_panel.c               \
-				draw_panels.c                  \
 				trender_progressive.c           \
 				render_progressive.c            \
 				free_resources.c                \
 				tworker_elapsedtime.c           \
 				tworker_init.c                  \
-				fractol.c)                     
+				fractol.c)
 SRCS_EVENTS = $(addprefix $(SRCS_EVENTS_DIR)/,  \
 				handler_key.c                   \
 				handler_mouse.c                 \
 				events_funcs.c                  \
 				events_init.c                   \
-				events.c)                       
+				events.c)
+SRCS_DRAW = $(addprefix $(SRCS_DRAW_DIR)/,      \
+				draw_text.c                     \
+				draw_help_panel.c               \
+				draw_panels.c                   \
+				draw_init.c)
 
-SRCS = $(SRCS_SRC) $(SRCS_EVENTS)
+SRCS = $(SRCS_SRC) $(SRCS_EVENTS) $(SRCS_DRAW)
 
 OBJS = $(SRCS:.c=.o)
 

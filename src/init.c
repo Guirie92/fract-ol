@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 20:16:07 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 14:01:02 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,61 @@
 
 void	compute_padding(t_fract *fract)
 {
-	fract->pad.thrd_x = fract->win_width * PADDING_THREAD_L_X_MUL;
-	fract->pad.thrd_y = fract->win_height * PADDING_THREAD_L_Y_MUL;
-	fract->pad.iter_x = fract->win_width * PADDING_ITER_L_X_MUL;
-	fract->pad.iter_y = fract->win_height * PADDING_ITER_L_Y_MUL;
-	fract->pad.rend_x = fract->win_width * PADDING_REND_L_X_MUL;
-	fract->pad.rend_y = fract->win_height * PADDING_REND_L_Y_MUL;
-	fract->pad.perc_x = fract->win_width * PADDING_PERC_R_X_MUL;
-	fract->pad.perc_y = fract->win_height * PADDING_PERC_R_Y_MUL;
-	fract->pad.panel_l_x = fract->win_width * PADDING_PANEL_L_X_MUL;
-	fract->pad.panel_l_y = fract->win_height * PADDING_PANEL_L_Y_MUL;
-	fract->pad.panel_r_x = fract->win_width * PADDING_PANEL_R_X_MUL;
-	fract->pad.panel_r_y = fract->win_height * PADDING_PANEL_R_Y_MUL;
-	fract->pad.panel_l_width = fract->win_width * PANEL_L_WIDTH_MUL;
-	fract->pad.panel_l_height = fract->win_height * PANEL_L_HEIGHT_MUL;
-	fract->pad.panel_r_width = fract->win_width * PANEL_R_WIDTH_MUL;
-	fract->pad.panel_r_height = fract->win_height * PANEL_R_HEIGHT_MUL;
+// 	fract->pad.thrd_x = fract->win_width * PADDING_THREAD_L_X_MUL;
+// 	fract->pad.thrd_y = fract->win_height * PADDING_THREAD_L_Y_MUL;
+// 	fract->pad.iter_x = fract->win_width * PADDING_ITER_L_X_MUL;
+// 	fract->pad.iter_y = fract->win_height * PADDING_ITER_L_Y_MUL;
+// 	fract->pad.rend_x = fract->win_width * PADDING_REND_L_X_MUL;
+// 	fract->pad.rend_y = fract->win_height * PADDING_REND_L_Y_MUL;
+// 	fract->pad.perc_x = fract->win_width * PADDING_PERC_R_X_MUL;
+// 	fract->pad.perc_y = fract->win_height * PADDING_PERC_R_Y_MUL;
+// 	fract->pad.panel_l_x = fract->win_width * PADDING_PANEL_L_X_MUL;
+// 	fract->pad.panel_l_y = fract->win_height * PADDING_PANEL_L_Y_MUL;
+// 	fract->pad.panel_r_x = fract->win_width * PADDING_PANEL_R_X_MUL;
+// 	fract->pad.panel_r_y = fract->win_height * PADDING_PANEL_R_Y_MUL;
+// 	// fract->pad.panel_l_width = fract->win_width * PANEL_L_WIDTH_MUL;
+// 	// fract->pad.panel_l_height = fract->win_height * PANEL_L_HEIGHT_MUL;
+// 	// fract->pad.panel_r_width = fract->win_width * PANEL_R_WIDTH_MUL;
+// 	// fract->pad.panel_r_height = fract->win_height * PANEL_R_HEIGHT_MUL;
+
+
+// # define PADDING_THREAD_L_X_MUL 45
+// # define PADDING_THREAD_L_Y_MUL 58
+
+// # define PADDING_ITER_L_X 45
+// # define PADDING_ITER_L_Y 43
+
+// # define PADDING_REND_L_X 45
+// # define PADDING_REND_L_Y 23
+
+// # define PADDING_PERC_R_X 65
+// # define PADDING_PERC_R_Y 23
+
+// # define PADDING_PANEL_L_X 35
+// # define PADDING_PANEL_L_Y 73
+
+// # define PADDING_PANEL_R_X 71
+// # define PADDING_PANEL_R_Y 35
+
+// # define PANEL_L_WIDTH 125
+// # define PANEL_L_HEIGHT 58
+
+// # define PANEL_R_WIDTH 35
+// # define PANEL_R_HEIGHT 16
+
+	fract->pad.thrd_x = PADDING_THREAD_L_X;
+	fract->pad.thrd_y = fract->win_height - PADDING_THREAD_L_Y;
+	fract->pad.iter_x = PADDING_ITER_L_X;
+	fract->pad.iter_y = fract->win_height - PADDING_ITER_L_Y;
+	fract->pad.rend_x = PADDING_REND_L_X;
+	fract->pad.rend_y = fract->win_height - PADDING_REND_L_Y;
+	fract->pad.perc_x = fract->win_width - PADDING_PERC_R_X;
+	fract->pad.perc_y = fract->win_height - PADDING_PERC_R_Y;
+	fract->pad.panel_l_x = PADDING_PANEL_L_X;
+	fract->pad.panel_l_y = fract->win_height - PADDING_PANEL_L_Y;
+	fract->pad.panel_r_x = fract->win_width - PADDING_PANEL_R_X;
+	fract->pad.panel_r_y = fract->win_height - PADDING_PANEL_R_Y;
+
 }
 
 void	compute_pix_to_fract_scale(t_fract *fract)
@@ -83,6 +122,14 @@ static void	init_vals(t_fract *fract)
 	fract->is_panning = 0;
 	fract->screenres = E_DEFAULT;
 	fract->progressive_rend = 1;
+	// fract->pad.panel_l_width = fract->win_width * PANEL_L_WIDTH_MUL;
+	// fract->pad.panel_l_height = fract->win_height * PANEL_L_HEIGHT_MUL;
+	// fract->pad.panel_r_width = fract->win_width * PANEL_R_WIDTH_MUL;
+	// fract->pad.panel_r_height = fract->win_height * PANEL_R_HEIGHT_MUL;
+	fract->pad.panel_l_width = 125;
+	fract->pad.panel_l_height = 58;
+	fract->pad.panel_r_width = 35;
+	fract->pad.panel_r_height = 16;
 }
 
 int	init(t_fract *fract)
@@ -102,10 +149,11 @@ int	init(t_fract *fract)
 	fract->win_width = WIDTH;
 	fract->win_height = HEIGHT;
 	compute_pix_to_fract_scale(fract);
+	init_vals(fract);
 	compute_padding(fract);
 	init_rend_funcs(fract);
 	init_panels(fract);
-	init_vals(fract);
+	init_text(fract);
 	if (render_init(fract) == E_MEM_ERROR)
 		return (E_MEM_ERROR);
 	return (ESUCESS);

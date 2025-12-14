@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 18:30:02 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 14:21:24 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,64 @@
 
 # define PANEL_R_WIDTH_MUL 0.035
 # define PANEL_R_HEIGHT_MUL 0.018
+
+// # define PADDING_THREAD_L_X 45
+// # define PADDING_THREAD_L_Y 58
+
+// # define PADDING_ITER_L_X 45
+// # define PADDING_ITER_L_Y 43
+
+// # define PADDING_REND_L_X 45
+// # define PADDING_REND_L_Y 23
+
+// # define PADDING_PERC_R_X 65
+// # define PADDING_PERC_R_Y 23
+
+// # define PADDING_PANEL_L_X 35
+// # define PADDING_PANEL_L_Y 73
+
+// # define PADDING_PANEL_R_X 71
+// # define PADDING_PANEL_R_Y 35
+
+// # define PANEL_L_WIDTH 125
+// # define PANEL_L_HEIGHT 58
+
+// # define PANEL_R_WIDTH 35
+// # define PANEL_R_HEIGHT 16
+	
+# define PADDING_JULIA_IM_L_X 15
+# define PADDING_JULIA_IM_L_Y 25
+# define PADDING_JULIA_RE_L_X 15
+# define PADDING_JULIA_RE_L_Y 40
+
+# define PADDING_PANEL_TL_X 10 // 8
+# define PADDING_PANEL_TL_Y 10
+# define PANEL_TL_WIDTH 118
+# define PANEL_TL_HEIGHT 35
+
+# define PADDING_THREAD_L_X 25
+# define PADDING_THREAD_L_Y 58
+
+# define PADDING_ITER_L_X 25
+# define PADDING_ITER_L_Y 43
+
+# define PADDING_REND_L_X 25
+# define PADDING_REND_L_Y 23
+
+# define PADDING_PERC_R_X 45
+# define PADDING_PERC_R_Y 23
+
+# define PADDING_PANEL_L_X 15
+# define PADDING_PANEL_L_Y 73
+
+# define PADDING_PANEL_R_X 51
+# define PADDING_PANEL_R_Y 35
+
+# define PANEL_L_WIDTH 125
+# define PANEL_L_HEIGHT 58
+
+# define PANEL_R_WIDTH 35
+# define PANEL_R_HEIGHT 16
 
 /* 10 MS -> 10 * 1,000,000 nanoseconds (16 MS = 60fps) */
 # define TIME_BUDGET 10000000LL

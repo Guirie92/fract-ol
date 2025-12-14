@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 20:51:44 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 12:33:37 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ void	free_res(t_fract *fract, int exit_status)
 	if (fract->mlx)
 		mlx_destroy_display(fract->mlx);
 	free(fract->mlx);
-
-	// if (fract->dp.dp_bl)
-	// 	free(fract->dp.dp_bl);
-	// if (fract->dp.dp_br)
-	// 	free(fract->dp.dp_br);
-	// if (fract->dp.dp_bc)
-	// 	free(fract->dp.dp_bc);
-
+	if (fract->dp.dp_bl)
+		free(fract->dp.dp_bl);
+	if (fract->dp.dp_br)
+		free(fract->dp.dp_br);
+	if (fract->dp.dp_bc)
+		free(fract->dp.dp_bc);
 	exit (exit_status);
 }

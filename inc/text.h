@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 02:16:24 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 12:54:25 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 # define INFO_WORKING "Working..."
 # define INFO_RENDER  "Rendered in "
 # define INFO_THREADS "N. of threads: "
+# define INFO_JULIA_RE "Re: "
+# define INFO_JULIA_IM "Im: "
+
+# define FIX_S_INFO_JULIA_RE 4
+# define FIX_S_INFO_JULIA_IM 4
+# define FIX_S_INFO_RENDER   12
+# define FIX_S_INFO_THREADS  15
+
 # define HELP_INFO    "\nPress \"h/H\" to display the HELP panel\n"
 
 # define HELPL_SIZE 35
