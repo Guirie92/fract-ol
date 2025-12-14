@@ -1,0 +1,141 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_funcs.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/12 19:49:36 by guillsan          #+#    #+#             */
+/*   Updated: 2025/12/13 02:36:24 by guillsan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fractol.h"
+#include "X11/keysym.h"
+#include "X11/X.h"
+#include <limits.h>
+
+static void	reboot(t_fract *fract)
+{
+	if (fract->mlx && fract->img.img)
+		mlx_destroy_image(fract->mlx, fract->img.img);
+	if (fract->mlx && fract->mlx_win)
+		mlx_destroy_window(fract->mlx, fract->mlx_win);
+	fract->mlx_win = mlx_new_window(fract->mlx, fract->win_width,
+			fract->win_height, fract->name);
+	if (!fract->mlx_win)
+		free_res(fract, EXIT_FAILURE);
+	fract->img.img = mlx_new_image(fract->mlx, fract->win_width,
+			fract->win_height);
+	if (!fract->img.img)
+		free_res(fract, EXIT_FAILURE);
+	fract->img.addr = mlx_get_data_addr(fract->img.img, &fract->img.bpp,
+			&fract->img.line_len, &fract->img.endian);
+	compute_pix_to_fract_scale(fract);
+	fract->esc_val = (MANDELBROT_RANGE_MAX * MANDELBROT_RANGE_MAX);
+	fract->steps = STEPS;
+	fract->inv_max = 1.0f / fract->steps;
+	fract->last_x = 0.0;
+	fract->last_y = 0.0;
+	fract->ren.total_blocks = 0;
+	fract->ren.comp_blocks = 0;
+	if (render_init(fract) == E_MEM_ERROR)
+		free_res(fract, EXIT_FAILURE);
+}
+
+static void	events_rehook(t_fract *fract)
+{
+	fract->sftx = 0.0;
+	if (fract->fract_mode == E_MANDELBROT)
+		fract->sftx = -0.5;
+	mlx_hook(fract->mlx_win, KeyPress, KeyPressMask, &key_handler, fract);
+	mlx_hook(fract->mlx_win, ButtonPress, ButtonPressMask,
+		&mouse_handler, fract);
+	mlx_hook(fract->mlx_win, DestroyNotify, StructureNotifyMask,
+		&exit_handler, fract);
+	mlx_hook(fract->mlx_win, ButtonRelease, ButtonReleaseMask,
+		&button_release_handler, fract);
+	mlx_hook(fract->mlx_win, MotionNotify,
+		PointerMotionMask | Button1MotionMask | ButtonMotionMask,
+		&mouse_motion_handler, fract);
+	progressive_reset(fract);
+}
+
+void	resize(t_fract *fract)
+{
+	if (fract->screenres == E_DEFAULT)
+	{
+		fract->screenres = E_1080;
+		fract->win_width = WIDTH_1080;
+		fract->win_height = HEIGHT_1080;
+	}
+	else if (fract->screenres == E_1080)
+	{
+		fract->screenres = E_4K;
+		fract->win_width = WIDTH_4K;
+		fract->win_height = HEIGHT_4K;
+	}
+	else if (fract->screenres == E_4K)
+	{
+		fract->screenres = E_DEFAULT;
+		fract->win_width = WIDTH;
+		fract->win_height = HEIGHT;
+	}
+	compute_padding(fract);
+	reboot(fract);
+	render(fract);
+	events_rehook(fract);
+	mlx_loop(fract->mlx);
+}
+
+void	handle_threads(t_fract *fract)
+{
+	int	idx;
+
+	if (fract->threads.num_active_threads == 0)
+		thread_init_pool(fract);
+	if (fract->threads.is_multithread == 0)
+	{
+		fract->render_func = &trender_progressive;
+		idx = (fract->fract_mode * NUM_COLOR_MODES)
+			+ fract->clr_mode + FUNC_BLOCK_S;
+		fract->threads.worker_rend_func = fract->rend_funcs[idx];
+		fract->threads.is_multithread = 1;
+	}
+	else
+	{
+		idx = (fract->fract_mode * NUM_COLOR_MODES) + fract->clr_mode;
+		fract->render_func = fract->rend_funcs[idx];
+		fract->threads.worker_rend_func = fract->rend_funcs[idx + FUNC_BLOCK_S];
+		fract->threads.is_multithread = 0;
+	}
+	render(fract);
+}
+
+void	switch_fractals(int keysym, t_fract *fract)
+{
+	int	idx;
+
+	if ((keysym == XK_1 && fract->fract_mode == E_MANDELBROT)
+		|| (keysym == XK_2 && fract->fract_mode == E_JULIA)
+		|| (keysym == XK_3 && fract->fract_mode == E_BURNING))
+		return ;
+	fract->sftx = 0.0;
+	fract->sfty = 0.0;
+	fract->zoom = 1.0;
+	if (keysym == XK_1)
+	{
+		fract->sftx = -0.5;
+		fract->fract_mode = E_MANDELBROT;
+	}
+	else if (keysym == XK_2)
+		fract->fract_mode = E_JULIA;
+	else
+		fract->fract_mode = E_BURNING;
+	idx = (fract->fract_mode * NUM_COLOR_MODES) + fract->clr_mode;
+	fract->render_func = fract->rend_funcs[idx];
+	if (fract->threads.is_multithread)
+		fract->render_func = &trender_progressive;
+	fract->threads.worker_rend_func = fract->rend_funcs[idx + FUNC_BLOCK_S];
+	render(fract);
+}
