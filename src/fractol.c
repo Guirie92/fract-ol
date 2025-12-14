@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:19:57 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 10:57:07 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 12:24:58 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,6 @@ int	main(int ac, char **av)
 {
 	t_fract	fract;
 	int		rcode;
-
-	float f = 23.5234;
-	f = 23.1234567891011;
-	char buf[30];
-	ft_ftoa_buffer(f, buf, 14);
-	// ft_ftoa_buffer(f, buf, 6);
-	ft_printf("%s\n", buf);
-	printf("%f\n", f);
-	return 0;
 
 	ft_memset(&fract, 0, sizeof(fract));
 	fract.julia_r = JULIA_DEFAULT_R_VAL;
