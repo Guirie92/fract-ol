@@ -6,7 +6,7 @@
 #    By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/24 20:50:11 by guillsan          #+#    #+#              #
-#    Updated: 2025/12/05 23:16:10 by guillsan         ###   ########.fr        #
+#    Updated: 2025/12/15 16:34:28 by guillsan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRCS_LIBFT = $(addprefix $(SRC_PATH)/,              \
 				ft_mod.c                            \
 				ft_isspace.c                        \
 				ft_itoa_buffer.c                    \
+				ft_lltoa_buffer.c                   \
+				ft_ulltoa_buffer.c                  \
 				ft_memset.c                         \
 				ft_memmove.c                        \
 				ft_strlen.c                         \

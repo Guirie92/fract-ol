@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:29:38 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 11:39:36 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:37:01 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	ft_ftoa_buffer(float nb, char *buf, int decimals)
 {
 	long long	ip;
 	float		fp;
-	char		tmp[32];
+	char		tmp[64];
 	char		*p;
 	long long	fractional;
-
+	
 	if (decimals > 9)
 		decimals = 9;
 	ip = process_integral(nb, &fp, &buf, decimals);
-	ft_itoa_buffer(ip, tmp);
+	ft_ulltoa_buffer(ip, tmp);
 	p = tmp;
 	while (*p)
 		*buf++ = *p++;
@@ -36,7 +36,9 @@ void	ft_ftoa_buffer(float nb, char *buf, int decimals)
 	{
 		*buf++ = '.';
 		process_fractional(fp, &fractional, &buf, decimals);
-		ft_itoa_buffer(fractional, tmp);
+		if (fractional < 0)
+			fractional = -fractional;
+		ft_ulltoa_buffer(fractional, tmp);
 		p = tmp;
 		while (*p)
 			*buf++ = *p++;

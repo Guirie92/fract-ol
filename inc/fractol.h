@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 21:44:25 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 12:10:10 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:37:43 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_fract
 	t_render		ren;
 	t_img			img;
 	t_img			panel;
+	t_img			jimg;
 	t_scale			scl;
 	t_fract_mode	fract_mode;
 	t_frametime		time;

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 12:12:04 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:20:28 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,6 @@
 
 void	compute_padding(t_fract *fract)
 {
-// 	fract->pad.thrd_x = fract->win_width * PADDING_THREAD_L_X_MUL;
-// 	fract->pad.thrd_y = fract->win_height * PADDING_THREAD_L_Y_MUL;
-// 	fract->pad.iter_x = fract->win_width * PADDING_ITER_L_X_MUL;
-// 	fract->pad.iter_y = fract->win_height * PADDING_ITER_L_Y_MUL;
-// 	fract->pad.rend_x = fract->win_width * PADDING_REND_L_X_MUL;
-// 	fract->pad.rend_y = fract->win_height * PADDING_REND_L_Y_MUL;
-// 	fract->pad.perc_x = fract->win_width * PADDING_PERC_R_X_MUL;
-// 	fract->pad.perc_y = fract->win_height * PADDING_PERC_R_Y_MUL;
-// 	fract->pad.panel_l_x = fract->win_width * PADDING_PANEL_L_X_MUL;
-// 	fract->pad.panel_l_y = fract->win_height * PADDING_PANEL_L_Y_MUL;
-// 	fract->pad.panel_r_x = fract->win_width * PADDING_PANEL_R_X_MUL;
-// 	fract->pad.panel_r_y = fract->win_height * PADDING_PANEL_R_Y_MUL;
-// 	// fract->pad.panel_l_width = fract->win_width * PANEL_L_WIDTH_MUL;
-// 	// fract->pad.panel_l_height = fract->win_height * PANEL_L_HEIGHT_MUL;
-// 	// fract->pad.panel_r_width = fract->win_width * PANEL_R_WIDTH_MUL;
-// 	// fract->pad.panel_r_height = fract->win_height * PANEL_R_HEIGHT_MUL;
-
-
-// # define PADDING_THREAD_L_X_MUL 45
-// # define PADDING_THREAD_L_Y_MUL 58
-
-// # define PADDING_ITER_L_X 45
-// # define PADDING_ITER_L_Y 43
-
-// # define PADDING_REND_L_X 45
-// # define PADDING_REND_L_Y 23
-
-// # define PADDING_PERC_R_X 65
-// # define PADDING_PERC_R_Y 23
-
-// # define PADDING_PANEL_L_X 35
-// # define PADDING_PANEL_L_Y 73
-
-// # define PADDING_PANEL_R_X 71
-// # define PADDING_PANEL_R_Y 35
-
-// # define PANEL_L_WIDTH 125
-// # define PANEL_L_HEIGHT 58
-
-// # define PANEL_R_WIDTH 35
-// # define PANEL_R_HEIGHT 16
-
 	fract->pad.thrd_x = PADDING_THREAD_L_X;
 	fract->pad.thrd_y = fract->win_height - PADDING_THREAD_L_Y;
 	fract->pad.iter_x = PADDING_ITER_L_X;
@@ -122,14 +80,10 @@ static void	init_vals(t_fract *fract)
 	fract->is_panning = 0;
 	fract->screenres = E_DEFAULT;
 	fract->progressive_rend = 1;
-	// fract->pad.panel_l_width = fract->win_width * PANEL_L_WIDTH_MUL;
-	// fract->pad.panel_l_height = fract->win_height * PANEL_L_HEIGHT_MUL;
-	// fract->pad.panel_r_width = fract->win_width * PANEL_R_WIDTH_MUL;
-	// fract->pad.panel_r_height = fract->win_height * PANEL_R_HEIGHT_MUL;
-	fract->pad.panel_l_width = 125;
-	fract->pad.panel_l_height = 58;
-	fract->pad.panel_r_width = 35;
-	fract->pad.panel_r_height = 16;
+	fract->pad.panel_l_width = PANEL_L_WIDTH;
+	fract->pad.panel_l_height = PANEL_L_HEIGHT;
+	fract->pad.panel_r_width = PANEL_R_WIDTH;
+	fract->pad.panel_r_height = PANEL_R_HEIGHT;
 }
 
 int	init(t_fract *fract)
@@ -144,11 +98,18 @@ int	init(t_fract *fract)
 	fract->img.img = mlx_new_image(fract->mlx, WIDTH, HEIGHT);
 	if (!fract->img.img)
 		return (E_MEM_ERROR);
-	fract->panel.img = mlx_new_image(fract->mlx, WIDTH, HEIGHT);
+	fract->img.addr = mlx_get_data_addr(fract->img.img, &fract->img.bpp,
+		&fract->img.line_len, &fract->img.endian);
+	fract->panel.img = mlx_new_image(fract->mlx, PANEL_TL_WIDTH, PANEL_TL_HEIGHT);
 	if (!fract->panel.img)
 		return (E_MEM_ERROR);
-	fract->img.addr = mlx_get_data_addr(fract->img.img, &fract->img.bpp,
-			&fract->img.line_len, &fract->img.endian);
+	fract->panel.addr = mlx_get_data_addr(fract->panel.img, &fract->panel.bpp,
+			&fract->panel.line_len, &fract->panel.endian);
+	fract->jimg.img = mlx_new_image(fract->mlx, PANEL_JS_WIDTH, PANEL_JS_HEIGHT);
+	if (!fract->jimg.img)
+		return (E_MEM_ERROR);
+	fract->jimg.addr = mlx_get_data_addr(fract->jimg.img, &fract->jimg.bpp,
+			&fract->jimg.line_len, &fract->jimg.endian);
 	fract->win_width = WIDTH;
 	fract->win_height = HEIGHT;
 	compute_pix_to_fract_scale(fract);

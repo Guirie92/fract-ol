@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 12:54:25 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:44:31 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define INFO_THREADS "N. of threads: "
 # define INFO_JULIA_RE "Re: "
 # define INFO_JULIA_IM "Im: "
+# define INFO_JULIA_NA "n/a"
 
 # define FIX_S_INFO_JULIA_RE 4
 # define FIX_S_INFO_JULIA_IM 4

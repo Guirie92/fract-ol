@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 20:49:27 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 14:21:16 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:35:22 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,17 @@ void	draw_dp(t_fract *fract)
 	dp.height = fract->pad.panel_r_height;
 	dp.op = 0.4;
 	darken_square_buffer(fract->dp.dp_br, fract, &dp);
+
+
+
+
+	
 	dp.start_x = PADDING_PANEL_TL_X;
 	dp.start_y = PADDING_PANEL_TL_Y;
 	dp.width = PANEL_TL_WIDTH;
 	dp.height = PANEL_TL_HEIGHT;
 	dp.op = 0;
-	darken_square_buffer(fract->dp.dp_bc, fract, &dp);
+	//darken_square_buffer_p(fract->dp.dp_bc, fract, &dp);
 	// revert_darken_square_buffer(fract->dp.dp_bc, fract, &dp);
 }
 
@@ -68,14 +73,20 @@ void	draw_julia_coords(t_fract *fract)
 	dp.start_y = PADDING_PANEL_TL_Y;
 	dp.width = PANEL_TL_WIDTH;
 	dp.height = PANEL_TL_HEIGHT;
-	dp.op = 0;
-	// darken_square_buffer(fract->dp.dp_bc, fract, &dp);
-	darken_square(fract, &dp);
-	
+	dp.op = 0.4;
+	darken_square_buffer_panel(fract->dp.dp_bc, fract, &dp);
+	mlx_put_image_to_window(fract->mlx, fract->mlx_win, fract->panel.img,
+		PADDING_PANEL_TL_X, PADDING_PANEL_TL_Y);
 	ft_ftoa_buffer(fract->julia_r,
 		&fract->text.julia_r[FIX_S_INFO_JULIA_RE], 9);
 	ft_ftoa_buffer(fract->julia_i,
 		&fract->text.julia_i[FIX_S_INFO_JULIA_IM], 9);
+	if ((fract->julia_r > 999.9 || fract->julia_r < -999.9)
+		|| (fract->julia_i > 999.9 || fract->julia_i < -999.9))
+	{
+		ft_memmove(&fract->text.julia_r[FIX_S_INFO_JULIA_RE], INFO_JULIA_NA, 4);
+		ft_memmove(&fract->text.julia_i[FIX_S_INFO_JULIA_IM], INFO_JULIA_NA, 4);
+	}
 	mlx_string_put(fract->mlx, fract->mlx_win, PADDING_JULIA_RE_L_X,
 		PADDING_JULIA_RE_L_Y, TEXT_CLR, fract->text.julia_r);
 	mlx_string_put(fract->mlx, fract->mlx_win, PADDING_JULIA_IM_L_X,

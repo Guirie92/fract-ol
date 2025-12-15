@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 12:06:45 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:24:01 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	free_res(t_fract *fract, int exit_status)
 		mlx_destroy_image(fract->mlx, fract->img.img);
 	if (fract->mlx && fract->panel.img)
 		mlx_destroy_image(fract->mlx, fract->panel.img);
+	if (fract->mlx && fract->jimg.img)
+		mlx_destroy_image(fract->mlx, fract->jimg.img);
 	if (fract->mlx && fract->mlx_win)
 		mlx_destroy_window(fract->mlx, fract->mlx_win);
 	if (fract->mlx)

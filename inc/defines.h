@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 18:46:24 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 19:37:20 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@
 
 /* FUNC_BLOCK_S = (NUM_FRACTALS * NUM_COLOR_MODES) */
 # define FUNC_BLOCK_S 6
+
+# define PADDING_PANEL_JS_X 350
+# define PADDING_PANEL_JS_Y 350
+# define PANEL_JS_WIDTH 350
+# define PANEL_JS_HEIGHT 350
 
 # define PADDING_THREAD_L_X_MUL 0.045
 # define PADDING_THREAD_L_Y_MUL 0.936

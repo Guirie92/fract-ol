@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:01:31 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 11:08:28 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:34:16 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int		ft_mod(int a, int b);
 size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_itoa_buffer(int n, char *buf);
+void	ft_lltoa_buffer(long long n, char *buf);
+void	ft_ulltoa_buffer(unsigned long long n, char *buf);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	ft_ftoa_buffer(float nb, char *buf, int decimals);
+
 
 #endif /* LIBFT_H */
