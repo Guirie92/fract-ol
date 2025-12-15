@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 14:01:02 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:12:04 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ int	init(t_fract *fract)
 	fract->img.img = mlx_new_image(fract->mlx, WIDTH, HEIGHT);
 	if (!fract->img.img)
 		return (E_MEM_ERROR);
+	fract->panel.img = mlx_new_image(fract->mlx, WIDTH, HEIGHT);
+	if (!fract->panel.img)
+		return (E_MEM_ERROR);
 	fract->img.addr = mlx_get_data_addr(fract->img.img, &fract->img.bpp,
 			&fract->img.line_len, &fract->img.endian);
 	fract->win_width = WIDTH;
@@ -152,9 +155,10 @@ int	init(t_fract *fract)
 	init_vals(fract);
 	compute_padding(fract);
 	init_rend_funcs(fract);
-	init_panels(fract);
-	init_text(fract);
-	if (render_init(fract) == E_MEM_ERROR)
+	// init_panels(fract);
+	// init_text(fract);
+	if (init_panels(fract) == E_MEM_ERROR || render_init(fract) == E_MEM_ERROR)
 		return (E_MEM_ERROR);
-	return (ESUCESS);
+	init_text(fract);
+	return (E_SUCCESS);
 }

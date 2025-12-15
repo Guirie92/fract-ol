@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/11 21:19:01 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:09:43 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	validate_arg(const char *s)
 	while (*s >= '0' && *s <= '9')
 		s++;
 	if (!*s)
-		return (ESUCESS);
+		return (E_SUCCESS);
 	else
 		return (EERROR);
 }
@@ -62,5 +62,5 @@ int	parse_args(t_fract *fract, char **av)
 	fract->fract_mode = E_JULIA;
 	fract->julia_r = ft_atodbl(av[2]);
 	fract->julia_i = ft_atodbl(av[3]);
-	return (ESUCESS);
+	return (E_SUCCESS);
 }

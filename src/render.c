@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 10:11:06 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:09:43 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,5 @@ int	render_init(t_fract *fract)
 			elapsedtime_worker, fract);
 	if (thread_res != 0)
 		return (E_MEM_ERROR);
-	return (ESUCESS);
+	return (E_SUCCESS);
 }

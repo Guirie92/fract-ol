@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 21:44:25 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 13:21:02 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:10:10 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_fract
 	t_text			text;
 	t_render		ren;
 	t_img			img;
+	t_img			panel;
 	t_scale			scl;
 	t_fract_mode	fract_mode;
 	t_frametime		time;
@@ -116,7 +117,7 @@ void	worker_rend_burning(t_worker_data *data, t_fract *fract);
 void	worker_rend_burning_depth(t_worker_data *data, t_fract *fract);
 
 void	compute_pix_to_fract_scale(t_fract *fract);
-void	init_panels(t_fract *fract);
+int		init_panels(t_fract *fract);
 int		render_init(t_fract *fract);
 void	*elapsedtime_worker(void *arg);
 void	draw_render_info(t_fract *fract);

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 10:39:48 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:09:43 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ typedef enum e_rcode
 {
 	EERROR,
 	E_MEM_ERROR,
-	ESUCESS,
+	E_SUCCESS,
 	EBREAK,
 	ECONTINUE,
 	ENONE
@@ -45,7 +45,7 @@ typedef enum e_color_mode
 typedef enum e_screenres
 {
 	E_DEFAULT,
-	E_1080,
+	E_2K,
 	E_4K,
 }	t_screenres;
 

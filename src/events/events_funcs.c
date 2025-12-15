@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 19:49:36 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 02:36:24 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/14 18:46:42 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void	resize(t_fract *fract)
 {
 	if (fract->screenres == E_DEFAULT)
 	{
-		fract->screenres = E_1080;
-		fract->win_width = WIDTH_1080;
-		fract->win_height = HEIGHT_1080;
+		fract->screenres = E_2K;
+		fract->win_width = WIDTH_2K;
+		fract->win_height = HEIGHT_2K;
 	}
-	else if (fract->screenres == E_1080)
+	else if (fract->screenres == E_2K)
 	{
 		fract->screenres = E_4K;
 		fract->win_width = WIDTH_4K;

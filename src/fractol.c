@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:19:57 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 12:24:58 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/15 12:09:43 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ static int	validate_args(int ac, char **av, t_fract *fract)
 		if (ft_strncmp(av[1], MANDELBROT_NAME, MANDELBROT_NAME_LEN) == 0)
 		{
 			fract->fract_mode = E_MANDELBROT;
-			return (ESUCESS);
+			return (E_SUCCESS);
 		}
 		else if (ft_strncmp(av[1], BURNING_NAME, BURNING_NAME_LEN) == 0)
 		{
 			fract->fract_mode = E_BURNING;
-			return (ESUCESS);
+			return (E_SUCCESS);
 		}
 	}
 	if (ac == 4)
 	{
 		if (ft_strncmp(av[1], JULIA_NAME, JULIA_NAME_LEN) == 0)
 		{
-			if (parse_args(fract, av) == ESUCESS)
-				return (ESUCESS);
+			if (parse_args(fract, av) == E_SUCCESS)
+				return (E_SUCCESS);
 		}
 	}
 	return (EERROR);
