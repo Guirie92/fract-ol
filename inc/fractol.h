@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 21:44:25 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 18:37:43 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:56:46 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ typedef struct s_fract
 	t_img			panel;
 	t_img			jimg;
 	t_scale			scl;
+	t_scale			jscl;
 	t_fract_mode	fract_mode;
+	t_fract_mode	prev_fract_mode;
 	t_frametime		time;
 	t_rcode			rcode;
 	t_panel_pad		pad;
@@ -59,8 +61,9 @@ typedef struct s_fract
 	t_color_mode	clr_mode;
 	t_dpanels		dp;
 	char			*help_lines[HELPL_SIZE];
-	void			*rend_funcs[12];
+	void			*rend_funcs[13];
 	t_render_func	render_func;
+	t_render_func	prev_render_func;
 	void			*mlx;
 	void			*mlx_win;
 	char			*name;
@@ -117,7 +120,10 @@ void	worker_rend_julia_depth(t_worker_data *data, t_fract *fract);
 void	worker_rend_burning(t_worker_data *data, t_fract *fract);
 void	worker_rend_burning_depth(t_worker_data *data, t_fract *fract);
 
+void	render_progressive_julia_preview(t_fract *fract);
+
 void	compute_pix_to_fract_scale(t_fract *fract);
+void	compute_pix_to_fract_scale_julia_preview(t_fract *fract);
 int		init_panels(t_fract *fract);
 int		render_init(t_fract *fract);
 void	*elapsedtime_worker(void *arg);

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 19:43:16 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:08:38 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,14 @@
 
 
 
-#define RENDER_PROGRESSIVE_JULIA render_progressive_julia_special
-#define RENDER_LOOP_JULIA render_loop_julia_special
-#define RENDER_BLOCK_JULIA render_block_julia_special
-#define COMPUTE_PIX compute_pix_julia
+#define RENDER_PROGRESSIVE_JULIA_PREVIEW render_progressive_julia_preview
+#define RENDER_LOOP_JULIA_PREVIEW render_loop_julia_preview
+#define RENDER_BLOCK_JULIA_PREVIEW render_block_julia_preview
+#define COMPUTE_PIX compute_pix_julia_preview
 #define PALETTE get_clr_palette_depth
-#include "render_template.h"
-#undef RENDER_PROGRESSIVE
-#undef RENDER_LOOP
-#undef RENDER_BLOCK
+#include "render_template_julia_preview.h"
+#undef RENDER_PROGRESSIVE_JULIA_PREVIEW
+#undef RENDER_LOOP_JULIA_PREVIEW
+#undef RENDER_BLOCK_JULIA_PREVIEW
 #undef COMPUTE_PIX
 #undef PALETTE

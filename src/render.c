@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 12:09:43 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:14:53 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,81 @@ void	progressive_reset(t_fract *fract)
 	fract->ren.comp_blocks = 0;
 	fract->ren.ren_time = 0.0;
 	fract->info_panel_on = 0;
+
+
+	// 	int i = 0;
+	// while (i < 4)
+	// {
+	// 	int s = fract->ren.s_val[i++];
+	// 	tiles_x = (fract->win_width + s - 1) / s;
+	// 	tiles_y = (fract->win_height + s - 1) / s;
+	// 	fract->ren.total_blocks += (unsigned long)tiles_x
+	// 		* (unsigned long)tiles_y;
+	// }
+}
+
+// static void	initialize_progressive_rend_config_julia_special(t_fract *fract)
+// {
+// 	int				tiles_x;
+// 	int				tiles_y;
+// 	int				i;
+// 	int				s;
+
+// 	fract->ren.block_s = 8;
+// 	fract->ren.s_val[0] = 8;
+// 	fract->ren.s_val[1] = 4;
+// 	fract->ren.s_val[2] = 2;
+// 	fract->ren.s_val[3] = 1;
+// 	fract->time.timekeeper_running = 0;
+// 	tiles_x = (PANEL_JS_WIDTH + fract->ren.block_s - 1) / fract->ren.block_s;
+// 	tiles_y = (PANEL_JS_HEIGHT + fract->ren.block_s - 1) / fract->ren.block_s;
+// 	fract->ren.pix_total = tiles_x * tiles_y;
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		s = fract->ren.s_val[i++];
+// 		tiles_x = (PANEL_JS_WIDTH + s - 1) / s;
+// 		tiles_y = (PANEL_JS_HEIGHT + s - 1) / s;
+// 		fract->ren.total_blocks += (unsigned long)tiles_x
+// 			* (unsigned long)tiles_y;
+// 	}
+// }
+
+void	progressive_reset_julia_special(t_fract *fract)
+{
+	int	tiles_x;
+	int	tiles_y;
+	//int	i;
+	//int	s;
+
+	//initialize_progressive_rend_config_julia_special(fract);
+	fract->ren.cur_block_x = 0;
+	fract->ren.cur_block_y = 0;
+	fract->ren.frame_count = 0;
+	fract->ren.cur_s_idx = 0;
+	fract->ren.block_s = fract->ren.s_val[fract->ren.cur_s_idx];
+	fract->ren.max_frames = fract->ren.block_s * fract->ren.block_s;
+	fract->ren.progressive_on = 1;
+	fract->ren.cur_s_idx = 0;
+	fract->ren.block_s = fract->ren.s_val[0];
+	fract->ren.progressive_on = 1;
+	fract->ren.pass_pix_idx = 0;
+	tiles_x = (PANEL_JS_WIDTH + fract->ren.block_s - 1) / fract->ren.block_s;
+	tiles_y = (PANEL_JS_HEIGHT + fract->ren.block_s - 1) / fract->ren.block_s;
+	fract->ren.pass_pix_total = tiles_x * tiles_y;
+	fract->ren.cur_y = 0;
+	fract->ren.comp_blocks = 0;
+	fract->ren.ren_time = 0.0;
+	fract->info_panel_on = 0;
+	// i = 0;
+	// while (i < 4)
+	// {
+	// 	s = fract->ren.s_val[i++];
+	// 	tiles_x = (PANEL_JS_WIDTH + s - 1) / s;
+	// 	tiles_y = (PANEL_JS_HEIGHT + s - 1) / s;
+	// 	fract->ren.total_blocks += (unsigned long)tiles_x
+	// 		* (unsigned long)tiles_y;
+	// }
 }
 
 int	progressive_tick(void *param)
@@ -52,7 +127,10 @@ int	progressive_tick(void *param)
 
 void	render(t_fract *fract)
 {
-	progressive_reset(fract);
+	if (fract->fract_mode == E_JULIA_PREVIEW)
+		progressive_reset_julia_special(fract);
+	else
+		progressive_reset(fract);
 }
 
 static void	initialize_progressive_rend_config(t_fract *fract)

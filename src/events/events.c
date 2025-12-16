@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 02:23:31 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:57:34 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,25 @@ int	exit_handler(t_fract *fract)
 {
 	free_res(fract, EXIT_FAILURE);
 	return (0);
+}
+
+static void toggle_julia_preview(t_fract *fract)
+{
+	if (fract->fract_mode != E_JULIA_PREVIEW)
+	{
+		compute_pix_to_fract_scale_julia_preview(fract);
+		fract->prev_fract_mode = fract->fract_mode;
+		fract->fract_mode = E_JULIA_PREVIEW;
+		fract->prev_render_func = fract->render_func;
+		fract->render_func = &render_progressive_julia_preview;
+		render(fract);
+	}
+	else
+	{
+		fract->fract_mode = fract->prev_fract_mode;
+		fract->render_func = fract->prev_render_func;
+		render(fract);
+	}
 }
 
 static inline void	check_keys_movement(int keysym, t_fract *fract)
@@ -65,6 +84,8 @@ static inline void	check_keys_general(int keysym, t_fract *fract)
 		toggle_progressive_renderer(fract);
 	else if (keysym == XK_1 || keysym == XK_2 || keysym == XK_3)
 		switch_fractals(keysym, fract);
+	else if (keysym == XK_j || keysym == XK_J)
+		toggle_julia_preview(fract);
 }
 
 int	key_handler(int keysym, t_fract *fract)

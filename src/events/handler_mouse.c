@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 04:18:38 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 13:36:02 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:14:53 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,10 @@ int	mouse_motion_handler(int x, int y, t_fract *fract)
 	{
 		calc_fract_coordinates(x, y, fract);
 		draw_julia_coords(fract);
+		if (fract->fract_mode == E_JULIA_PREVIEW)
+		{
+			render(fract);
+		}
 	}
 	return (0);
 }

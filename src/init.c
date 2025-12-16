@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 19:20:28 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:13:18 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,29 @@ void	compute_pix_to_fract_scale(t_fract *fract)
 	fract->scl.offseth = lerp.new_min - (lerp.old_min * fract->scl.sfh);
 }
 
+void	compute_pix_to_fract_scale_julia_preview(t_fract *fract)
+{
+	int		size;
+	t_lerp	lerp;
+
+	if (PANEL_JS_WIDTH > PANEL_JS_HEIGHT)
+		size = PANEL_JS_HEIGHT;
+	else
+		size = PANEL_JS_WIDTH;
+	lerp.new_min = MANDELBROT_RANGE_MIN;
+	lerp.new_max = MANDELBROT_RANGE_MAX;
+	lerp.old_min = 0;
+	lerp.old_max = size;
+	fract->jscl.sfw = scale_factor(&lerp);
+	fract->jscl.offsetw = lerp.new_min - (lerp.old_min * fract->jscl.sfw);
+	lerp.new_min = MANDELBROT_RANGE_MAX;
+	lerp.new_max = MANDELBROT_RANGE_MIN;
+	lerp.old_min = 0;
+	lerp.old_max = size;
+	fract->jscl.sfh = scale_factor(&lerp);
+	fract->jscl.offseth = lerp.new_min - (lerp.old_min * fract->jscl.sfh);
+}
+
 static void	init_rend_funcs(t_fract *fract)
 {
 	fract->rend_funcs[0] = &render_progressive_mandelbrot;
@@ -68,6 +91,9 @@ static void	init_rend_funcs(t_fract *fract)
 	fract->rend_funcs[9] = &worker_rend_julia_depth;
 	fract->rend_funcs[10] = &worker_rend_burning;
 	fract->rend_funcs[11] = &worker_rend_burning_depth;
+
+	
+	fract->rend_funcs[12] = &render_progressive_julia_preview;
 }
 
 static void	init_vals(t_fract *fract)

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 18:36:48 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 15:53:09 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef enum e_fract_mode
 	E_MANDELBROT,
 	E_JULIA,
 	E_BURNING,
-	E_JULIA_SPECIAL,
+	E_JULIA_PREVIEW,
 }	t_fract_mode;
 
 typedef enum e_color_type

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_julia_special.h                             :+:      :+:    :+:   */
+/*   render_julia_preview.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 19:35:17 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:05:45 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_JULIA_SPECIAL_H
-# define RENDER_JULIA_SPECIAL_H
+#ifndef RENDER_JULIA_PREVIEW_H
+# define RENDER_JULIA_PREVIEW_H
 
 # include "fractol.h"
 # include "math_utils.h"
 
-static inline void	fill_blocks_julia(int py, int px, int s, t_fract *fract)
+static inline void	fill_blocks_julia_preview(int py, int px, int s, t_fract *fract)
 {
 	int	i;
 	int	k;
@@ -36,7 +36,7 @@ static inline void	fill_blocks_julia(int py, int px, int s, t_fract *fract)
 	}
 }
 
-static inline int	pass_check_julia(t_fract *fract, int *tiles_x)
+static inline t_rcode	pass_check_julia_preview(t_fract *fract, int *tiles_x)
 {
 	int	tiles_y;
 
@@ -64,26 +64,52 @@ static inline int	pass_check_julia(t_fract *fract, int *tiles_x)
 	return (ENONE);
 }
 
-// static inline int	compute_pix_julia(int x, int y, t_fract *fract)
-// {
-// 	t_complex	z;
-// 	t_complex	c;
-// 	int			i;
+static inline int	compute_pix_mandelbrot_julia_preview(
+	int x, int y, t_fract *fract)
+{
+	t_complex	z;
+	t_complex	c;
+	int			i;
 
-// 	z.x = (x * fract->scl.sfw + fract->scl.offsetw) * fract->zoom + fract->sftx;
-// 	z.y = (y * fract->scl.sfh + fract->scl.offseth) * fract->zoom + fract->sfty;
-// 	c.x = fract->julia_r;
-// 	c.y = fract->julia_i;
-// 	i = 0;
-// 	while (i < fract->steps)
-// 	{
-// 		z = add_comp(sq_comp(z), c);
-// 		fract->magnitude_sq = z.x * z.x + z.y * z.y;
-// 		if (fract->magnitude_sq > fract->esc_val)
-// 			break ;
-// 		i++;
-// 	}
-// 	return (i);
-// }
+	z.x = (x * fract->jscl.sfw + fract->jscl.offsetw);
+	z.y = (y * fract->jscl.sfh + fract->jscl.offseth);
+	c.x = fract->julia_r;
+	c.y = fract->julia_i;
+	i = 0;
+	while (i < fract->steps)
+	{
+		z = add_comp(sq_comp(z), c);
+		fract->magnitude_sq = z.x * z.x + z.y * z.y;
+		if (fract->magnitude_sq > fract->esc_val)
+			break ;
+		i++;
+	}
+	return (i);
+}
 
-#endif /* RENDER_JULIA_SPECIAL_H */
+static inline int	compute_pix_burning_julia_preview(
+	int x, int y, t_fract *fract)
+{
+	t_complex	z;
+	t_complex	c;
+	int			i;
+
+	z.x = (x * fract->jscl.sfw + fract->jscl.offsetw);
+	z.y = (y * fract->jscl.sfh + fract->jscl.offseth);
+	c.x = fract->julia_r;
+	c.y = fract->julia_i;
+	i = 0;
+	while (i < fract->steps)
+	{
+		z.x = fabs(z.x);
+		z.y = -fabs(z.y);
+		z = add_comp(sq_comp(z), c);
+		fract->magnitude_sq = z.x * z.x + z.y * z.y;
+		if (fract->magnitude_sq > fract->esc_val)
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+#endif /* RENDER_JULIA_PREVIEW_H */
