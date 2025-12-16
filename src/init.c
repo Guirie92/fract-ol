@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 15:13:18 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 23:47:44 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	compute_pix_to_fract_scale_julia_preview(t_fract *fract)
 	int		size;
 	t_lerp	lerp;
 
-	if (PANEL_JS_WIDTH > PANEL_JS_HEIGHT)
-		size = PANEL_JS_HEIGHT;
+	if (fract->j_preview_width > fract->j_preview_height)
+		size = fract->j_preview_height;
 	else
-		size = PANEL_JS_WIDTH;
+		size = fract->j_preview_width;
 	lerp.new_min = MANDELBROT_RANGE_MIN;
 	lerp.new_max = MANDELBROT_RANGE_MAX;
 	lerp.old_min = 0;
@@ -81,19 +81,26 @@ static void	init_rend_funcs(t_fract *fract)
 {
 	fract->rend_funcs[0] = &render_progressive_mandelbrot;
 	fract->rend_funcs[1] = &render_progressive_mandelbrot_depth;
-	fract->rend_funcs[2] = &render_progressive_julia;
-	fract->rend_funcs[3] = &render_progressive_julia_depth;
-	fract->rend_funcs[4] = &render_progressive_burning;
-	fract->rend_funcs[5] = &render_progressive_burning_depth;
-	fract->rend_funcs[6] = &worker_rend_mandelbrot;
-	fract->rend_funcs[7] = &worker_rend_mandelbrot_depth;
-	fract->rend_funcs[8] = &worker_rend_julia;
-	fract->rend_funcs[9] = &worker_rend_julia_depth;
+	fract->rend_funcs[2] = &render_progressive_burning;
+	fract->rend_funcs[3] = &render_progressive_burning_depth;
+	fract->rend_funcs[4] = &render_progressive_mandelbrot_julia;
+	fract->rend_funcs[5] = &render_progressive_mandelbrot_julia_depth;
+	fract->rend_funcs[6] = &render_progressive_burning_julia;
+	fract->rend_funcs[7] = &render_progressive_burning_julia_depth;
+	fract->rend_funcs[8] = &worker_rend_mandelbrot;
+	fract->rend_funcs[9] = &worker_rend_mandelbrot_depth;
 	fract->rend_funcs[10] = &worker_rend_burning;
 	fract->rend_funcs[11] = &worker_rend_burning_depth;
+	fract->rend_funcs[12] = &worker_rend_mandelbrot_julia;
+	fract->rend_funcs[13] = &worker_rend_mandelbrot_julia_depth;
+	fract->rend_funcs[14] = &worker_rend_burning_julia;
+	fract->rend_funcs[15] = &worker_rend_burning_julia_depth;
 
 	
-	fract->rend_funcs[12] = &render_progressive_julia_preview;
+	fract->rend_funcs[16] = &rend_p_mandelbrot_julia_preview;
+	fract->rend_funcs[17] = &rend_p_burning_julia_preview;
+	fract->rend_funcs[18] = &worker_mandelbrot_julia_preview;
+	fract->rend_funcs[19] = &worker_burning_julia_preview;
 }
 
 static void	init_vals(t_fract *fract)
@@ -110,6 +117,8 @@ static void	init_vals(t_fract *fract)
 	fract->pad.panel_l_height = PANEL_L_HEIGHT;
 	fract->pad.panel_r_width = PANEL_R_WIDTH;
 	fract->pad.panel_r_height = PANEL_R_HEIGHT;
+	fract->j_preview_width = PANEL_JP_WIDTH;
+	fract->j_preview_height = PANEL_JP_HEIGHT;
 }
 
 int	init(t_fract *fract)
@@ -131,7 +140,8 @@ int	init(t_fract *fract)
 		return (E_MEM_ERROR);
 	fract->panel.addr = mlx_get_data_addr(fract->panel.img, &fract->panel.bpp,
 			&fract->panel.line_len, &fract->panel.endian);
-	fract->jimg.img = mlx_new_image(fract->mlx, PANEL_JS_WIDTH, PANEL_JS_HEIGHT);
+	fract->jimg.img = mlx_new_image(fract->mlx, PANEL_JP_WIDTH,
+		PANEL_JP_HEIGHT);
 	if (!fract->jimg.img)
 		return (E_MEM_ERROR);
 	fract->jimg.addr = mlx_get_data_addr(fract->jimg.img, &fract->jimg.bpp,

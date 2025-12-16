@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 15:14:53 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 19:58:08 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "fractol.h"
 #include <stdatomic.h>
 
-void	progressive_reset(t_fract *fract)
+static void	progressive_reset(t_fract *fract)
 {
 	int	tiles_x;
 	int	tiles_y;
@@ -77,7 +77,7 @@ void	progressive_reset(t_fract *fract)
 // 	}
 // }
 
-void	progressive_reset_julia_special(t_fract *fract)
+static void	progressive_reset_julia_special(t_fract *fract)
 {
 	int	tiles_x;
 	int	tiles_y;
@@ -96,8 +96,8 @@ void	progressive_reset_julia_special(t_fract *fract)
 	fract->ren.block_s = fract->ren.s_val[0];
 	fract->ren.progressive_on = 1;
 	fract->ren.pass_pix_idx = 0;
-	tiles_x = (PANEL_JS_WIDTH + fract->ren.block_s - 1) / fract->ren.block_s;
-	tiles_y = (PANEL_JS_HEIGHT + fract->ren.block_s - 1) / fract->ren.block_s;
+	tiles_x = (fract->j_preview_width + fract->ren.block_s - 1) / fract->ren.block_s;
+	tiles_y = (fract->j_preview_height + fract->ren.block_s - 1) / fract->ren.block_s;
 	fract->ren.pass_pix_total = tiles_x * tiles_y;
 	fract->ren.cur_y = 0;
 	fract->ren.comp_blocks = 0;
@@ -127,7 +127,8 @@ int	progressive_tick(void *param)
 
 void	render(t_fract *fract)
 {
-	if (fract->fract_mode == E_JULIA_PREVIEW)
+	if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW
+		|| fract->fract_mode == E_BURNING_JULIA_PREVIEW)
 		progressive_reset_julia_special(fract);
 	else
 		progressive_reset(fract);

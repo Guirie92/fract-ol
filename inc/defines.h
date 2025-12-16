@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 19:37:20 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 23:03:17 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,27 @@
 
 # define PRIME_STRIDE 1299827
 
-# define NUM_FRACTALS 3 
+# define NUM_FRACTALS 4 
 # define NUM_COLOR_MODES 2
 
 /* FUNC_BLOCK_S = (NUM_FRACTALS * NUM_COLOR_MODES) */
-# define FUNC_BLOCK_S 6
+# define FUNC_BLOCK_S 8
 
-# define PADDING_PANEL_JS_X 350
-# define PADDING_PANEL_JS_Y 350
-# define PANEL_JS_WIDTH 350
-# define PANEL_JS_HEIGHT 350
+// # define PADDING_PANEL_JS_X 350
+// # define PADDING_PANEL_JS_Y 350
+// # define PANEL_JS_WIDTH 350
+// # define PANEL_JS_HEIGHT 350
+
+# define PANEL_JP_WIDTH 450
+# define PANEL_JP_HEIGHT 450
+
+# define PANEL_JP_WIDTH_2K 800
+# define PANEL_JP_HEIGHT_2K 800
+
+# define PANEL_JP_WIDTH_4K 1200
+# define PANEL_JP_HEIGHT_4K 1200
+
+# define OUTLINE_THICKNESS 1
 
 # define PADDING_THREAD_L_X_MUL 0.045
 # define PADDING_THREAD_L_Y_MUL 0.936

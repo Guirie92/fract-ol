@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 02:10:50 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 23:34:23 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef void			(*t_worker_rend_func) (t_worker_data *, t_fract *);
 typedef struct s_threads
 {
 	t_worker_rend_func	worker_rend_func;
+	t_worker_rend_func	prev_worker_rend_func;
 
 	/* Thread Pool Control */
 	pthread_t			pool_threads[MAX_THREADS];

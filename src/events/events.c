@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 15:57:34 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 23:59:26 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,93 @@ int	exit_handler(t_fract *fract)
 	return (0);
 }
 
+static void render_window_outline(t_fract *fract)
+{
+	/* top */
+	for (int y = 0; y < OUTLINE_THICKNESS; y++)
+	{
+		for (int x = 0; x < fract->j_preview_width; x++)
+		{
+			int offset = (y * fract->jimg.line_len) + (x * fract->jimg.bpp / 8);
+			*(unsigned int *)(fract->jimg.addr + offset) = GRAY;
+		}
+	} 
+	
+	/* bottom */
+	for (int y = fract->j_preview_height - OUTLINE_THICKNESS; y < fract->j_preview_height; y++) {
+	    for (int x = 0; x < fract->j_preview_width; x++) {
+	        int offset = (y * fract->jimg.line_len) + (x * fract->jimg.bpp / 8);
+			*(unsigned int *)(fract->jimg.addr + offset) = GRAY;
+	    }
+	}
+
+	/* left */
+	for (int y = OUTLINE_THICKNESS; y < fract->j_preview_height - OUTLINE_THICKNESS; y++) {
+	    for (int x = 0; x < OUTLINE_THICKNESS; x++) {
+	        int offset = (y * fract->jimg.line_len) + (x * fract->jimg.bpp / 8);
+			*(unsigned int *)(fract->jimg.addr + offset) = GRAY;
+	    }
+	}
+	
+	/* right */
+		for (int y = OUTLINE_THICKNESS; y < fract->j_preview_height - OUTLINE_THICKNESS; y++) {
+	    for (int x = fract->j_preview_width - OUTLINE_THICKNESS; x < fract->j_preview_width; x++) {
+	        int offset = (y * fract->jimg.line_len) + (x * fract->jimg.bpp / 8);
+			*(unsigned int *)(fract->jimg.addr + offset) = GRAY;
+	    }
+	}
+}
+
 static void toggle_julia_preview(t_fract *fract)
 {
-	if (fract->fract_mode != E_JULIA_PREVIEW)
+	if (fract->fract_mode == E_MANDELBROT
+		|| fract->fract_mode == E_BURNING)
 	{
 		compute_pix_to_fract_scale_julia_preview(fract);
+		render_window_outline(fract);
 		fract->prev_fract_mode = fract->fract_mode;
-		fract->fract_mode = E_JULIA_PREVIEW;
 		fract->prev_render_func = fract->render_func;
-		fract->render_func = &render_progressive_julia_preview;
+		fract->threads.prev_worker_rend_func = fract->threads.worker_rend_func;
+		fract->prev_progressive_rend = fract->progressive_rend;
+		fract->progressive_rend = 0;
+		if (fract->fract_mode == E_MANDELBROT)
+		{
+			fract->fract_mode = E_MANDELBROT_JULIA_PREVIEW;
+			fract->render_func = &rend_p_mandelbrot_julia_preview;
+			if (fract->threads.is_multithread)
+				fract->render_func = &trender_progressive_julia_prev;
+			fract->threads.worker_rend_func = &worker_mandelbrot_julia_preview;
+		}
+		else
+		{
+			fract->fract_mode = E_BURNING_JULIA_PREVIEW;
+			fract->render_func = &rend_p_burning_julia_preview;
+			if (fract->threads.is_multithread)
+				fract->render_func = &trender_progressive_julia_prev;
+			fract->threads.worker_rend_func = &worker_burning_julia_preview;
+		}
+		
+		// idx = (fract->fract_mode * NUM_COLOR_MODES) + fract->clr_mode;
+		// printf("idx: %d\n", idx);
+		// fract->render_func = fract->rend_funcs[idx];
+		// if (fract->threads.is_multithread)
+		// 	fract->render_func = &trender_progressive;
+		// fract->threads.worker_rend_func = fract->rend_funcs[idx + FUNC_BLOCK_S];
+	
 		render(fract);
 	}
-	else
+	else if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW
+			|| fract->fract_mode == E_BURNING_JULIA_PREVIEW)
 	{
+		fract->progressive_rend = fract->prev_progressive_rend;
 		fract->fract_mode = fract->prev_fract_mode;
+		// fract->render_func = fract->prev_render_func;
+
 		fract->render_func = fract->prev_render_func;
+		if (fract->threads.is_multithread)
+			fract->render_func = &trender_progressive;
+		fract->threads.worker_rend_func = fract->threads.prev_worker_rend_func;
+		
 		render(fract);
 	}
 }
@@ -83,7 +155,7 @@ static inline void	check_keys_general(int keysym, t_fract *fract)
 	else if (keysym == XK_p || keysym == XK_P)
 		toggle_progressive_renderer(fract);
 	else if (keysym == XK_1 || keysym == XK_2 || keysym == XK_3)
-		switch_fractals(keysym, fract);
+		switch_fractals(keysym, 1, fract);
 	else if (keysym == XK_j || keysym == XK_J)
 		toggle_julia_preview(fract);
 }

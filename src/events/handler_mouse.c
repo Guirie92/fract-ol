@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 04:18:38 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 15:14:53 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 20:36:15 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,48 @@ static void	calc_fract_coordinates(int x, int y, t_fract *fract)
 	double	coord_x_scaled;
 	double	coord_y_scaled;
 
-	if (fract->fract_mode == E_JULIA)
+	if (fract->fract_mode == E_MANDELBROT_JULIA
+		|| fract->fract_mode == E_BURNING_JULIA)
 		return ;
 	coord_x_scaled = (double)x * fract->scl.sfw + fract->scl.offsetw;
 	coord_y_scaled = (double)y * fract->scl.sfh + fract->scl.offseth;
 	fract->julia_r = fract->sftx + coord_x_scaled * fract->zoom;
 	fract->julia_i = fract->sfty + coord_y_scaled * fract->zoom;
+}
+
+static void process_fractal_switch(int x, int y, t_fract* fract)
+{
+	// if (fract->fract_mode != E_MANDELBROT_JULIA
+	// 	&& fract->fract_mode != E_BURNING_JULIA)
+	calc_fract_coordinates(x, y, fract);
+	if (fract->fract_mode == E_MANDELBROT_JULIA)
+	{
+		
+		fract->sftx = fract->prev_sftx;
+		fract->sfty = fract->prev_sfty;
+		fract->zoom = fract->prev_zoom;
+		switch_fractals(XK_1, 0, fract);
+	}
+	else if (fract->fract_mode == E_BURNING_JULIA)
+		switch_fractals(XK_2, 0, fract);
+	else
+	{
+		if (fract->prev_progressive_rend)
+			fract->progressive_rend = fract->prev_progressive_rend;
+
+		fract->prev_sftx = fract->sftx;
+		fract->prev_sfty = fract->sfty;
+		fract->prev_zoom = fract->zoom;
+		fract->sftx = 0.0;
+		fract->sfty = 0.0;
+		fract->zoom = 1.0;
+		// fract->fract_mode = fract->prev_fract_mode;
+		// fract->render_func = fract->prev_render_func;
+		// render(fract);
+		// if (fract->fract_mode == E_BURNING_JULIA)
+		// 	switch_fractals(XK_2, fract);
+		switch_fractals(XK_3, 0, fract);
+	}
 }
 
 /*
@@ -58,9 +94,7 @@ int	mouse_handler(int btn, int x, int y, t_fract *fract)
 	}
 	else if (btn == Button3)
 	{
-		if (fract->fract_mode != E_JULIA)
-			calc_fract_coordinates(x, y, fract);
-		switch_fractals(XK_2, fract);
+		process_fractal_switch(x, y, fract);
 	}
 	else if (btn == Button4)
 		process_zoom(fract, 1 - ZOOM_AMOUNT, x, y);
@@ -101,7 +135,8 @@ int	mouse_motion_handler(int x, int y, t_fract *fract)
 	{
 		calc_fract_coordinates(x, y, fract);
 		draw_julia_coords(fract);
-		if (fract->fract_mode == E_JULIA_PREVIEW)
+		if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW
+			|| fract->fract_mode == E_BURNING_JULIA_PREVIEW)
 		{
 			render(fract);
 		}

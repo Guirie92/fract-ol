@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 02:22:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 02:23:58 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 17:28:06 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	events_init(t_fract *fract)
 		&button_release_handler, fract);
 	mlx_hook(fract->mlx_win, MotionNotify, PointerMotionMask,
 		&mouse_motion_handler, fract);
-	progressive_reset(fract);
+	//progressive_reset(fract);
 	mlx_loop_hook(fract->mlx, &progressive_tick, fract);
 }

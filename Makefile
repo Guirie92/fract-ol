@@ -6,14 +6,15 @@
 #    By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 21:58:38 by guillsan          #+#    #+#              #
-#    Updated: 2025/12/14 14:30:12 by guillsan         ###   ########.fr        #
+#    Updated: 2025/12/16 19:46:27 by guillsan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
 CC = cc
-CFLAGS = -O3 -Wall -Wextra -Werror
+# CFLAGS = -O3 -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 SRCS_DIR = src
 SRCS_EVENTS_DIR = $(SRCS_DIR)/events

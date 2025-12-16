@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 21:44:25 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 15:56:46 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 23:59:45 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_fract
 	t_color_mode	clr_mode;
 	t_dpanels		dp;
 	char			*help_lines[HELPL_SIZE];
-	void			*rend_funcs[13];
+	void			*rend_funcs[20];
 	t_render_func	render_func;
 	t_render_func	prev_render_func;
 	void			*mlx;
@@ -69,8 +69,11 @@ typedef struct s_fract
 	char			*name;
 	double			esc_val;
 	double			sftx;
+	double			prev_sftx;
 	double			sfty;
+	double			prev_sfty;
 	double			zoom;
+	double			prev_zoom;
 	double			julia_r;
 	double			julia_i;
 	double			magnitude_sq;
@@ -88,8 +91,11 @@ typedef struct s_fract
 	unsigned int	clr;
 	int				win_width;
 	int				win_height;
+	int				j_preview_width;
+	int				j_preview_height;
 	int				info_panel_on;
 	int				progressive_rend;
+	int				prev_progressive_rend;
 }	t_fract;
 
 int		init(t_fract *fract);
@@ -102,25 +108,34 @@ void	ft_log(int fd, char *msg);
 void	exit_message(int fd, char *msg);
 
 int		progressive_tick(void *param);
-void	progressive_reset(t_fract *fract);
+//void	progressive_reset(t_fract *fract);
 
 void	trender_progressive(t_fract *fract);
+void	trender_progressive_julia_prev(t_fract *fract);
 
 void	render_progressive_mandelbrot(t_fract *fract);
 void	render_progressive_mandelbrot_depth(t_fract *fract);
 void	render_progressive_burning(t_fract *fract);
 void	render_progressive_burning_depth(t_fract *fract);
-void	render_progressive_julia(t_fract *fract);
-void	render_progressive_julia_depth(t_fract *fract);
+
+void	render_progressive_mandelbrot_julia(t_fract *fract);
+void	render_progressive_mandelbrot_julia_depth(t_fract *fract);
+void	render_progressive_burning_julia(t_fract *fract);
+void	render_progressive_burning_julia_depth(t_fract *fract);
 
 void	worker_rend_mandelbrot(t_worker_data *data, t_fract *fract);
 void	worker_rend_mandelbrot_depth(t_worker_data *data, t_fract *fract);
-void	worker_rend_julia(t_worker_data *data, t_fract *fract);
-void	worker_rend_julia_depth(t_worker_data *data, t_fract *fract);
 void	worker_rend_burning(t_worker_data *data, t_fract *fract);
 void	worker_rend_burning_depth(t_worker_data *data, t_fract *fract);
+void	worker_rend_mandelbrot_julia(t_worker_data *data, t_fract *fract);
+void	worker_rend_mandelbrot_julia_depth(t_worker_data *data, t_fract *fract);
+void	worker_rend_burning_julia(t_worker_data *data, t_fract *fract);
+void	worker_rend_burning_julia_depth(t_worker_data *data, t_fract *fract);
 
-void	render_progressive_julia_preview(t_fract *fract);
+void	rend_p_mandelbrot_julia_preview(t_fract *fract);
+void	rend_p_burning_julia_preview(t_fract *fract);
+void	worker_mandelbrot_julia_preview(t_worker_data *data, t_fract *fract);
+void	worker_burning_julia_preview(t_worker_data *data, t_fract *fract);
 
 void	compute_pix_to_fract_scale(t_fract *fract);
 void	compute_pix_to_fract_scale_julia_preview(t_fract *fract);
@@ -129,7 +144,7 @@ int		render_init(t_fract *fract);
 void	*elapsedtime_worker(void *arg);
 void	draw_render_info(t_fract *fract);
 void	draw_help_panel(t_fract *fract);
-void	switch_fractals(int keysym, t_fract *fract);
+void	switch_fractals(int keysym, int is_keypressed, t_fract *fract);
 void	revert_dp(t_fract *fract);
 void	draw_dp(t_fract *fract);
 void	init_text(t_fract *fract);

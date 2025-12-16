@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 16:05:45 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 00:15:48 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static inline void	fill_blocks_julia_preview(int py, int px, int s, t_fract *fra
 	int	offset;
 
 	i = py;
-	while (i < py + s && i < PANEL_JS_HEIGHT)
+	while (i < py + s && i < fract->j_preview_height - OUTLINE_THICKNESS)
 	{
 		k = px;
-		while (k < px + s && k < PANEL_JS_WIDTH)
+		while (k < px + s && k < fract->j_preview_width - OUTLINE_THICKNESS)
 		{
 			offset = (i * fract->jimg.line_len) + (k * fract->jimg.bpp / 8);
 			*(unsigned int *)(fract->jimg.addr + offset) = fract->clr;
@@ -52,9 +52,9 @@ static inline t_rcode	pass_check_julia_preview(t_fract *fract, int *tiles_x)
 		else
 		{
 			fract->ren.block_s = fract->ren.s_val[fract->ren.cur_s_idx];
-			*tiles_x = (PANEL_JS_WIDTH + fract->ren.block_s - 1)
+			*tiles_x = (fract->j_preview_width - OUTLINE_THICKNESS + fract->ren.block_s - 1)
 				/ fract->ren.block_s;
-			tiles_y = (PANEL_JS_HEIGHT + fract->ren.block_s - 1)
+			tiles_y = (fract->j_preview_height - OUTLINE_THICKNESS + fract->ren.block_s - 1)
 				/ fract->ren.block_s;
 			fract->ren.pass_pix_total = *tiles_x * tiles_y;
 			fract->ren.pass_pix_idx = 0;
@@ -76,7 +76,7 @@ static inline int	compute_pix_mandelbrot_julia_preview(
 	c.x = fract->julia_r;
 	c.y = fract->julia_i;
 	i = 0;
-	while (i < fract->steps)
+	while (i < STEPS)
 	{
 		z = add_comp(sq_comp(z), c);
 		fract->magnitude_sq = z.x * z.x + z.y * z.y;
@@ -99,7 +99,7 @@ static inline int	compute_pix_burning_julia_preview(
 	c.x = fract->julia_r;
 	c.y = fract->julia_i;
 	i = 0;
-	while (i < fract->steps)
+	while (i < STEPS)
 	{
 		z.x = fabs(z.x);
 		z.y = -fabs(z.y);

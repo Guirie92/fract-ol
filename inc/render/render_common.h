@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 04:00:44 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:25:20 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,31 @@ static inline int	compute_pix_mandelbrot(int x, int y, t_fract *fract)
 	return (i);
 }
 
-static inline int	compute_pix_julia(int x, int y, t_fract *fract)
+static inline int	compute_pix_burning_ship(int x, int y, t_fract *fract)
+{
+	t_complex	z;
+	t_complex	c;
+	int			i;
+
+	z.x = 0.0;
+	z.y = 0.0;
+	c.x = (x * fract->scl.sfw + fract->scl.offsetw) * fract->zoom + fract->sftx;
+	c.y = (y * fract->scl.sfh + fract->scl.offseth) * fract->zoom + fract->sfty;
+	i = 0;
+	while (i < fract->steps)
+	{
+		z.x = fabs(z.x);
+		z.y = -fabs(z.y);
+		z = add_comp(sq_comp(z), c);
+		fract->magnitude_sq = z.x * z.x + z.y * z.y;
+		if (fract->magnitude_sq > fract->esc_val)
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+static inline int	compute_pix_mandelbrot_julia(int x, int y, t_fract *fract)
 {
 	t_complex	z;
 	t_complex	c;
@@ -108,16 +132,16 @@ static inline int	compute_pix_julia(int x, int y, t_fract *fract)
 	return (i);
 }
 
-static inline int	compute_pix_burning_ship(int x, int y, t_fract *fract)
+static inline int	compute_pix_burning_julia(int x, int y, t_fract *fract)
 {
 	t_complex	z;
 	t_complex	c;
 	int			i;
 
-	z.x = 0.0;
-	z.y = 0.0;
-	c.x = (x * fract->scl.sfw + fract->scl.offsetw) * fract->zoom + fract->sftx;
-	c.y = (y * fract->scl.sfh + fract->scl.offseth) * fract->zoom + fract->sfty;
+	z.x = (x * fract->scl.sfw + fract->scl.offsetw) * fract->zoom + fract->sftx;
+	z.y = (y * fract->scl.sfh + fract->scl.offseth) * fract->zoom + fract->sfty;
+	c.x = fract->julia_r;
+	c.y = fract->julia_i;
 	i = 0;
 	while (i < fract->steps)
 	{

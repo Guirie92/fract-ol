@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 12:09:43 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:46:34 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_args(t_fract *fract, char **av)
 		return (EERROR);
 	if (validate_arg(av[3]) == EERROR)
 		return (EERROR);
-	fract->fract_mode = E_JULIA;
+	fract->fract_mode = E_MANDELBROT_JULIA;
 	fract->julia_r = ft_atodbl(av[2]);
 	fract->julia_i = ft_atodbl(av[3]);
 	return (E_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 15:53:09 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 23:27:58 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ typedef enum e_rcode
 typedef enum e_fract_mode
 {
 	E_MANDELBROT,
-	E_JULIA,
 	E_BURNING,
-	E_JULIA_PREVIEW,
+	E_MANDELBROT_JULIA,
+	E_BURNING_JULIA,
+	E_MANDELBROT_JULIA_PREVIEW,
+	E_BURNING_JULIA_PREVIEW,
 }	t_fract_mode;
 
 typedef enum e_color_type
@@ -110,5 +112,16 @@ typedef struct s_scale
 	int		offsetw;
 	int		offseth;
 }	t_scale;
+
+typedef struct s_trend_data
+{
+	double			mg_sq;
+	int				s;
+	int				px;
+	int				py;
+	int				px_center;
+	int				py_center;
+	unsigned int	color;
+}	t_trend_data;
 
 #endif /* DATA_H */

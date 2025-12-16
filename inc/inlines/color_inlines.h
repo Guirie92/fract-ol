@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/13 01:30:28 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 23:26:28 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,28 @@ static inline unsigned int	get_clr_palette_depth(double i, t_fract *fract)
 		return (0);
 	return (palette(i / fract->steps, fract->clr_shift));
 }
+
+static inline unsigned int	get_clr_palette_depth_preview(double i, t_fract *fract)
+{
+	if (i >= STEPS)
+		return (0);
+	return (palette(i / STEPS, fract->clr_shift));
+}
+
+// static inline unsigned int	get_clr_palette_depth_preview(
+// 	double i, t_fract *fract)
+// {
+// 	if (i >= STEPS)
+// 		return (0);
+// 	return (palette(i / STEPS, fract->clr_shift));
+// }
+// static inline unsigned int	get_clr_palette_depth_preview(
+// 	double i, t_fract *fract)
+// {
+// 	if (i >= fract->steps)
+// 		return (0);
+// 	return (palette(i / STEPS, fract->clr_shift));
+// }
 
 static inline unsigned int	get_clr_palette_depth_smooth(double i,
 	t_fract *fract, double mg_sq)

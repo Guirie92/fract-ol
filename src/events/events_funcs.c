@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 19:49:36 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/14 18:46:42 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/16 20:36:03 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	reboot(t_fract *fract)
 {
 	if (fract->mlx && fract->img.img)
 		mlx_destroy_image(fract->mlx, fract->img.img);
+	if (fract->mlx && fract->jimg.img)
+		mlx_destroy_image(fract->mlx, fract->jimg.img);
 	if (fract->mlx && fract->mlx_win)
 		mlx_destroy_window(fract->mlx, fract->mlx_win);
 	fract->mlx_win = mlx_new_window(fract->mlx, fract->win_width,
@@ -31,6 +33,12 @@ static void	reboot(t_fract *fract)
 		free_res(fract, EXIT_FAILURE);
 	fract->img.addr = mlx_get_data_addr(fract->img.img, &fract->img.bpp,
 			&fract->img.line_len, &fract->img.endian);
+	fract->jimg.img = mlx_new_image(fract->mlx, fract->j_preview_width,
+			fract->j_preview_height);
+	if (!fract->jimg.img)
+		free_res(fract, EXIT_FAILURE);
+	fract->jimg.addr = mlx_get_data_addr(fract->jimg.img, &fract->jimg.bpp,
+			&fract->jimg.line_len, &fract->jimg.endian);
 	compute_pix_to_fract_scale(fract);
 	fract->esc_val = (MANDELBROT_RANGE_MAX * MANDELBROT_RANGE_MAX);
 	fract->steps = STEPS;
@@ -58,7 +66,7 @@ static void	events_rehook(t_fract *fract)
 	mlx_hook(fract->mlx_win, MotionNotify,
 		PointerMotionMask | Button1MotionMask | ButtonMotionMask,
 		&mouse_motion_handler, fract);
-	progressive_reset(fract);
+	//progressive_reset(fract);
 }
 
 void	resize(t_fract *fract)
@@ -68,18 +76,24 @@ void	resize(t_fract *fract)
 		fract->screenres = E_2K;
 		fract->win_width = WIDTH_2K;
 		fract->win_height = HEIGHT_2K;
+		fract->j_preview_width = PANEL_JP_WIDTH_2K;
+		fract->j_preview_height = PANEL_JP_HEIGHT_2K;
 	}
 	else if (fract->screenres == E_2K)
 	{
 		fract->screenres = E_4K;
 		fract->win_width = WIDTH_4K;
 		fract->win_height = HEIGHT_4K;
+		fract->j_preview_width = PANEL_JP_WIDTH_4K;
+		fract->j_preview_height = PANEL_JP_HEIGHT_4K;
 	}
 	else if (fract->screenres == E_4K)
 	{
 		fract->screenres = E_DEFAULT;
 		fract->win_width = WIDTH;
 		fract->win_height = HEIGHT;
+		fract->j_preview_width = PANEL_JP_WIDTH;
+		fract->j_preview_height = PANEL_JP_HEIGHT;
 	}
 	compute_padding(fract);
 	reboot(fract);
@@ -112,26 +126,35 @@ void	handle_threads(t_fract *fract)
 	render(fract);
 }
 
-void	switch_fractals(int keysym, t_fract *fract)
+void	switch_fractals(int keysym, int is_keypressed, t_fract *fract)
 {
 	int	idx;
 
 	if ((keysym == XK_1 && fract->fract_mode == E_MANDELBROT)
-		|| (keysym == XK_2 && fract->fract_mode == E_JULIA)
-		|| (keysym == XK_3 && fract->fract_mode == E_BURNING))
+		|| (keysym == XK_2 && fract->fract_mode == E_BURNING)
+		|| ((keysym == XK_3 && fract->fract_mode == E_MANDELBROT_JULIA)
+		|| (keysym == XK_3 && fract->fract_mode == E_BURNING_JULIA)))
 		return ;
-	fract->sftx = 0.0;
-	fract->sfty = 0.0;
-	fract->zoom = 1.0;
 	if (keysym == XK_1)
-	{
-		fract->sftx = -0.5;
 		fract->fract_mode = E_MANDELBROT;
-	}
 	else if (keysym == XK_2)
-		fract->fract_mode = E_JULIA;
-	else
 		fract->fract_mode = E_BURNING;
+	else
+	{
+		if (fract->fract_mode == E_MANDELBROT
+			|| fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW)
+			fract->fract_mode = E_MANDELBROT_JULIA;
+		else
+			fract->fract_mode = E_BURNING_JULIA;
+	}
+	if (is_keypressed)
+	{
+		fract->sftx = 0.0;
+		fract->sfty = 0.0;
+		fract->zoom = 1.0;
+		if (fract->fract_mode == E_MANDELBROT)
+			fract->sftx = -0.5;
+	}
 	idx = (fract->fract_mode * NUM_COLOR_MODES) + fract->clr_mode;
 	fract->render_func = fract->rend_funcs[idx];
 	if (fract->threads.is_multithread)
