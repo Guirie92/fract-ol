@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/17 01:23:37 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 03:12:00 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # define JULIA_DEFAULT_R_VAL -0.8
 # define JULIA_DEFAULT_I_VAL 0.156
 
-# define MANDELBROT_NAME_LEN 10
-# define BURNING_NAME_LEN    7
-# define JULIA_NAME_LEN      5
+# define MANDELBROT_NAME_LEN 11
+# define BURNING_NAME_LEN    8
+# define JULIA_NAME_LEN      6
 
 # define MANDELBROT_RANGE_MIN -3
 # define MANDELBROT_RANGE_MAX  3
