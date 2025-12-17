@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 23:27:58 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 04:09:00 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef enum e_screenres
 
 typedef struct s_panel_pad
 {
+	int	title_x;
+	int	title_y;
 	int	thrd_x;
 	int	thrd_y;
 	int	iter_x;
@@ -74,6 +76,7 @@ typedef struct s_panel_pad
 
 typedef struct s_text
 {
+	char	title[48];
 	char	percentage[5];
 	char	iterations[17];
 	char	render_time[32];
@@ -93,7 +96,7 @@ typedef struct s_dpanels
 {
 	int	*dp_bl;
 	int	*dp_br;
-	int	*dp_bc;
+	int	*dp_tl;
 }	t_dpanels;
 
 typedef struct s_frametime

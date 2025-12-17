@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 04:18:38 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/17 01:45:00 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 03:33:12 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ static void process_fractal_switch(int x, int y, t_fract* fract)
  */
 int	mouse_handler(int btn, int x, int y, t_fract *fract)
 {
-	if (btn == Button1)
+	if (btn == Button3)
+	{
+		process_fractal_switch(x, y, fract);
+	}
+	else if (btn == Button1)
 	{
 		fract->is_panning = 1;
 		fract->last_x = x;
 		fract->last_y = y;
-	}
-	else if (btn == Button3)
-	{
-		process_fractal_switch(x, y, fract);
 	}
 	else if (btn == Button4)
 		process_zoom(fract, 1 - ZOOM_AMOUNT, x, y);

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/17 03:12:00 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 04:14:43 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 # define MANDELBROT_NAME "mandelbrot"
 # define BURNING_NAME    "burning"
 # define JULIA_NAME      "julia"
+
+# define MANDELBROT_TITLE   "Mandelbrot set"
+# define BURNING_TITLE      "Burning Ship set"
+# define MAN_JULIA_MODE     "Mandelbrot (julia type)"
+# define BUR_JULIA_MODE     "Burning Ship (julia type)"
+# define MAN_JULIA_PREVIEW  "Mandelbrot (julia live preview)"
+# define BUR_JULIA_PREVIEW  "Burning Ship (julia live preview)"
+
+# define MANDELBROT_TITLE_S  15
+# define BURNING_TITLE_S     17
+# define MAN_JULIA_MODE_S    24
+# define BUR_JULIA_MODE_S    26
+# define MAN_JULIA_PREVIEW_S 32
+# define BUR_JULIA_PREVIEW_S 34
 
 # define JULIA_DEFAULT_R_VAL -0.8
 # define JULIA_DEFAULT_I_VAL 0.156
@@ -134,15 +148,34 @@
 # define PANEL_R_WIDTH_MUL 0.035
 # define PANEL_R_HEIGHT_MUL 0.018
 
+# define PADDING_TITLE_X 15
+# define PADDING_TITLE_Y 25
+
 # define PADDING_JULIA_RE_L_X 15
-# define PADDING_JULIA_RE_L_Y 25
+# define PADDING_JULIA_RE_L_Y 40
 # define PADDING_JULIA_IM_L_X 15
-# define PADDING_JULIA_IM_L_Y 40
+# define PADDING_JULIA_IM_L_Y 55
 
 # define PADDING_PANEL_TL_X 10
 # define PADDING_PANEL_TL_Y 10
-# define PANEL_TL_WIDTH 118
-# define PANEL_TL_HEIGHT 35
+# define PANEL_TL_WIDTH 210
+# define PANEL_TL_HEIGHT 51
+
+# define PANEL_TL_MANDELBROT_TITLE_WIDTH  118
+# define PANEL_TL_BURNING_TITLE_WIDTH     120
+# define PANEL_TL_MAN_JULIA_MODE_WIDTH    160
+# define PANEL_TL_BUR_JULIA_MODE_WIDTH    170
+# define PANEL_TL_MAN_JULIA_PREVIEW_WIDTH 205
+# define PANEL_TL_BUR_JULIA_PREVIEW_WIDTH 220
+
+// # define PADDING_JULIA_RE_L_X 15
+// # define PADDING_JULIA_RE_L_Y 25
+// # define PADDING_JULIA_IM_L_X 15
+// # define PADDING_JULIA_IM_L_Y 40
+// # define PADDING_PANEL_TL_X 10
+// # define PADDING_PANEL_TL_Y 10
+// # define PANEL_TL_WIDTH 118
+// # define PANEL_TL_HEIGHT 35
 
 # define PADDING_THREAD_L_X 25
 # define PADDING_THREAD_L_Y 58

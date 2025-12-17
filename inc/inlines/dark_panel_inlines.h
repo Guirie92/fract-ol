@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 14:20:14 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 04:12:32 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,34 @@ static inline void	darken_square_buffer_panel(int *buffer,
 			color = get_pixel_color(fract, x, y);
 			buffer[buf_idx++] = color;
 			color = darken_color(color, dp->op);
+			offset = ((y - dp->start_y) * fract->panel.line_len) + ((x - dp->start_x) * fract->panel.bpp / 8);
+			*(unsigned int *)(fract->panel.addr + offset) = color;
+			x++;
+		}
+		y++;
+	}
+}
+
+static inline void	darken_square_buffer_panel_width(int *buffer,
+	t_fract *fract, t_darkpanel *dp, int width)
+{
+	int	x;
+	int	y;
+	int	color;
+	int	offset;
+	int	buf_idx;
+
+	y = dp->start_y;
+	buf_idx = 0;
+	while (y < dp->start_y + dp->height)
+	{
+		x = dp->start_x;
+		while (x < dp->start_x + width)
+		{
+			color = get_pixel_color(fract, x, y);
+			buffer[buf_idx++] = color;
+			if (x < dp->width)
+				color = darken_color(color, dp->op);
 			offset = ((y - dp->start_y) * fract->panel.line_len) + ((x - dp->start_x) * fract->panel.bpp / 8);
 			*(unsigned int *)(fract->panel.addr + offset) = color;
 			x++;

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/17 01:44:36 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 04:18:15 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ static void toggle_julia_preview(t_fract *fract)
 				fract->render_func = &trender_progressive_julia_preview;
 			fract->threads.worker_rend_func = &worker_burning_julia_preview;
 		}
+		draw_julia_coords(fract);
 		render(fract);
 	}
 	else if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW

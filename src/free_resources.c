@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 19:24:01 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 04:09:00 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_res(t_fract *fract, int exit_status)
 		free(fract->dp.dp_bl);
 	if (fract->dp.dp_br)
 		free(fract->dp.dp_br);
-	if (fract->dp.dp_bc)
-		free(fract->dp.dp_bc);
+	if (fract->dp.dp_tl)
+		free(fract->dp.dp_tl);
 	exit (exit_status);
 }

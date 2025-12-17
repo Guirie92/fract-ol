@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:43:55 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/17 02:40:07 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 04:09:00 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	init_dark_panels(t_fract *fract)
 	if (!fract->dp.dp_br)
 		return (E_MEM_ERROR);
 	size = PANEL_TL_WIDTH * PANEL_TL_HEIGHT;
-	fract->dp.dp_bc = malloc(size * sizeof(int));
-	if (!fract->dp.dp_bc)
+	fract->dp.dp_tl = malloc(size * sizeof(int));
+	if (!fract->dp.dp_tl)
 		return (E_MEM_ERROR);
 	return (E_SUCCESS);
 }
