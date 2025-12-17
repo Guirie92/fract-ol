@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 16:44:31 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 02:43:50 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # define TEXT_CLR 0xA0A0A0
 # define LINE_H 10
-# define INFO_PANEL_WIDTH 500
-# define INFO_PANEL_HEIGHT 500
+# define INFO_PANEL_WIDTH 550
+# define INFO_PANEL_HEIGHT 620
 # define TXT_PADDING_X 100
-# define TXT_PADDING_Y 50
+# define TXT_PADDING_Y 150
 
 # define INFO_WORKING "Working..."
 # define INFO_RENDER  "Rendered in "
@@ -34,41 +34,58 @@
 
 # define HELP_INFO    "\nPress \"h/H\" to display the HELP panel\n"
 
-# define HELPL_SIZE 35
-# define HELP_L1  "+-----------------------------------------------+"
-# define HELP_L2  "|                                               |"
-# define HELP_L3  "|           *** FRACTOL CONTROLS ***            |"
-# define HELP_L4  "|                                               |"
-# define HELP_L5  "|    --------------------------------------     |"
-# define HELP_L6  "|                                               |"
-# define HELP_L7  "|                                               |"
-# define HELP_L8  "|    H/h   : Toggle this help panel             |"
-# define HELP_L9  "|                                               |"
-# define HELP_L10 "|    P/p   : Toggle progressive render          |"
-# define HELP_L11 "|                                               |"
-# define HELP_L12 "|    T/t   : Toggle multi-threading mode        |"
-# define HELP_L13 "|                                               |"
-# define HELP_L14 "|                                               |"
-# define HELP_L15 "|    R/r   : Recenter the view                  |"
-# define HELP_L16 "|                                               |"
-# define HELP_L17 "|    ARROWS: Pan (move) the fractal             |"
-# define HELP_L18 "|                                               |"
-# define HELP_L19 "|    DRAG  : Pan (move) the fractal             |"
-# define HELP_L20 "|                                               |"
-# define HELP_L21 "|    WHEEL : Zoom in/out                        |"
-# define HELP_L22 "|                                               |"
-# define HELP_L23 "|                                               |"
-# define HELP_L24 "|    +/-   : Increase/Decrease Max Iterations   |"
-# define HELP_L25 "|                                               |"
-# define HELP_L26 "|    C/c   : Cycle color gradients              |"
-# define HELP_L27 "|                                               |"
-# define HELP_L28 "|    V/v   : Toggle color depth                 |"
-# define HELP_L29 "|                                               |"
-# define HELP_L30 "|                                               |"
-# define HELP_L31 "|                                               |"
-# define HELP_L32 "|    1/2/3 : Switch between fractals            |"
-# define HELP_L33 "|                                               |"
-# define HELP_L34 "|                                               |"
-# define HELP_L35 "+-----------------------------------------------+"
+# define HELPL_SIZE 52
+# define HELP_L1  "+-------------------------------------------------------+"
+# define HELP_L2  "|                                                       |"
+# define HELP_L3  "|               *** FRACTOL CONTROLS ***                |"
+# define HELP_L4  "|                                                       |"
+# define HELP_L5  "|        --------------------------------------         |"
+# define HELP_L6  "|                                                       |"
+# define HELP_L7  "|                                                       |"
+# define HELP_L8  "|        H/h    : Toggle this help panel                |"
+# define HELP_L9  "|                                                       |"
+# define HELP_L10 "|        P/p    : Toggle progressive render             |"
+# define HELP_L11 "|                                                       |"
+# define HELP_L12 "|        T/t    : Toggle multi-threading mode           |"
+# define HELP_L13 "|                                                       |"
+# define HELP_L14 "|                                                       |"
+# define HELP_L15 "|        R/r    : Recenter the view                     |"
+# define HELP_L16 "|                                                       |"
+# define HELP_L17 "|        ARROWS : Pan (move) the fractal                |"
+# define HELP_L18 "|                                                       |"
+# define HELP_L19 "|        DRAG   : Pan (move) the fractal                |"
+# define HELP_L20 "|                                                       |"
+# define HELP_L21 "|        WHEEL  : Zoom in/out                           |"
+# define HELP_L22 "|                                                       |"
+# define HELP_L23 "|                                                       |"
+# define HELP_L24 "|        +/-    : Increase/Decrease Max Iterations      |"
+# define HELP_L25 "|                                                       |"
+# define HELP_L26 "|        C/c    : Cycle color gradients                 |"
+# define HELP_L27 "|                                                       |"
+# define HELP_L28 "|        V/v    : Toggle color depth                    |"
+# define HELP_L29 "|                                                       |"
+# define HELP_L30 "|        F/f    : Switch screen size (def, 2K, 4K)      |"
+# define HELP_L31 "|                                                       |"
+# define HELP_L32 "|                                                       |"
+# define HELP_L33 "|        1/2/3  : Switch between fractals               |"
+# define HELP_L34 "|                                                       |"
+# define HELP_L35 "|        L-click: Display julia at coordinates          |"
+# define HELP_L36 "|                                                       |"
+# define HELP_L37 "|                                                       |"
+# define HELP_L38 "|                                                       |"
+# define HELP_L39 "|              **    SPECIAL FEATURE      **            |"
+# define HELP_L40 "|                                                       |"
+# define HELP_L41 "|               ----------------------                  |"
+# define HELP_L42 "|                                                       |"
+# define HELP_L43 "|        J/j    : Toggle Julia Live Preview             |"
+# define HELP_L44 "|                                                       |"
+# define HELP_L45 "|               (J/j again to toggle off)               |"
+# define HELP_L46 "|                                                       |"
+# define HELP_L47 "|       Move cursor to preview julia in real time       |"
+# define HELP_L48 "|                                                       |"
+# define HELP_L49 "|     Left click to jump to julia fractal full size     |"
+# define HELP_L50 "|                                                       |"
+# define HELP_L51 "|                                                       |"
+# define HELP_L52 "+-------------------------------------------------------+"
 
 #endif /* TEXT_H */

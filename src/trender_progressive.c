@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 23:58:36 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 01:26:54 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void	trender_progressive(t_fract *fract)
 	draw_render_info(fract);
 }
 
-void	trender_progressive_julia_prev(t_fract *fract)
+void	trender_progressive_julia_preview(t_fract *fract)
 {
 	t_timing	t;
 
@@ -196,10 +196,10 @@ void	trender_progressive_julia_prev(t_fract *fract)
 			&fract->threads.pool_mutex);
 	fract->threads.work_ready = 0;
 	pthread_mutex_unlock(&fract->threads.pool_mutex);
-	draw_dp(fract);
+	//draw_dp(fract);
 		mlx_put_image_to_window(fract->mlx, fract->mlx_win, fract->jimg.img,
 		fract->win_width - fract->j_preview_width,
 		fract->win_height - fract->j_preview_height);
 	fract->ren.ren_time += timing_read_current_s(&t);
-	draw_render_info(fract);
+	//draw_render_info(fract);
 }

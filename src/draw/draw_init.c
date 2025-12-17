@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:43:55 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 12:54:30 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 02:40:07 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	init_panels(t_fract *fract)
 		HELP_L9, HELP_L10, HELP_L11, HELP_L12, HELP_L13, HELP_L14, HELP_L15,
 		HELP_L16, HELP_L17, HELP_L18, HELP_L19, HELP_L20, HELP_L21, HELP_L22,
 		HELP_L23, HELP_L24, HELP_L25, HELP_L26, HELP_L27, HELP_L28, HELP_L29,
-		HELP_L30, HELP_L31, HELP_L32, HELP_L33, HELP_L34, HELP_L35
+		HELP_L30, HELP_L31, HELP_L32, HELP_L33, HELP_L34, HELP_L35, HELP_L36,
+		HELP_L37, HELP_L38, HELP_L39, HELP_L40, HELP_L41, HELP_L42, HELP_L43,
+		HELP_L44, HELP_L45, HELP_L46, HELP_L47, HELP_L48, HELP_L49, HELP_L50,
+		HELP_L51, HELP_L52
 	};
 
 	ft_memmove(fract->help_lines, tmp, sizeof(tmp));

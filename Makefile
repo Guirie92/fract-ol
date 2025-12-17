@@ -6,15 +6,15 @@
 #    By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/20 21:58:38 by guillsan          #+#    #+#              #
-#    Updated: 2025/12/16 19:46:27 by guillsan         ###   ########.fr        #
+#    Updated: 2025/12/17 00:49:17 by guillsan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
 CC = cc
-# CFLAGS = -O3 -Wall -Wextra -Werror
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -O3 -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror -g3
 
 SRCS_DIR = src
 SRCS_EVENTS_DIR = $(SRCS_DIR)/events
@@ -55,12 +55,15 @@ MLX_FILE = $(MLX_DIR)/libmlx.a
 
 INC = -I inc
 INC_INLINES = -I inc/inlines
+INC_RENDER = -I inc/render
+INC_RENDER_THREADS = -I inc/render_threads
 
 INC_LIB = -I $(LIB_DIR)/inc
 INC_MLX = -I $(MLX_DIR)
 
 # Compilation and Linking Flags
-C_INCLUDES = $(INC) $(INC_LIB) $(INC_INLINES) $(INC_MLX) 
+C_INCLUDES = $(INC) $(INC_LIB) $(INC_INLINES) $(INC_RENDER) \
+				$(INC_RENDER_THREADS) $(INC_MLX)
 # Links the Libft lib and its path
 LDFLAGS = -L $(LIB_DIR) -lft -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
 

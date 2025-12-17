@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 20:49:27 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/15 18:35:22 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 01:53:02 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ void	draw_dp(t_fract *fract)
 	dp.height = fract->pad.panel_r_height;
 	dp.op = 0.4;
 	darken_square_buffer(fract->dp.dp_br, fract, &dp);
-
-
-
 
 	
 	dp.start_x = PADDING_PANEL_TL_X;

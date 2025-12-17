@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 23:59:26 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 01:44:36 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,40 +29,64 @@ int	exit_handler(t_fract *fract)
 	return (0);
 }
 
+/* It renders just the outline, 4 lines, without traversing the whole pixel
+ * matrix. Loops go:
+ * - top
+ * - bottom
+ * - left
+ * - right
+ */
 static void render_window_outline(t_fract *fract)
 {
-	/* top */
-	for (int y = 0; y < OUTLINE_THICKNESS; y++)
+	int	y;
+	int	x;
+	
+	y = 0;
+	while (y < OUTLINE_THICKNESS)
 	{
-		for (int x = 0; x < fract->j_preview_width; x++)
+		x = 0;
+		while (x < fract->j_preview_width)
 		{
 			int offset = (y * fract->jimg.line_len) + (x * fract->jimg.bpp / 8);
 			*(unsigned int *)(fract->jimg.addr + offset) = GRAY;
+			x++;
 		}
+		y++;
 	} 
-	
-	/* bottom */
-	for (int y = fract->j_preview_height - OUTLINE_THICKNESS; y < fract->j_preview_height; y++) {
-	    for (int x = 0; x < fract->j_preview_width; x++) {
+	y = fract->j_preview_height - OUTLINE_THICKNESS;
+	while (y < fract->j_preview_height)
+	{
+		x = 0;
+	    while (x < fract->j_preview_width)
+		{
 	        int offset = (y * fract->jimg.line_len) + (x * fract->jimg.bpp / 8);
 			*(unsigned int *)(fract->jimg.addr + offset) = GRAY;
+			x++;
 	    }
+		y++;
 	}
-
-	/* left */
-	for (int y = OUTLINE_THICKNESS; y < fract->j_preview_height - OUTLINE_THICKNESS; y++) {
-	    for (int x = 0; x < OUTLINE_THICKNESS; x++) {
+	y = OUTLINE_THICKNESS;
+	while (y < fract->j_preview_height - OUTLINE_THICKNESS)
+	{
+		x = 0;
+	    while (x < OUTLINE_THICKNESS) {
 	        int offset = (y * fract->jimg.line_len) + (x * fract->jimg.bpp / 8);
 			*(unsigned int *)(fract->jimg.addr + offset) = GRAY;
+			x++;
 	    }
+		y++;
 	}
-	
-	/* right */
-		for (int y = OUTLINE_THICKNESS; y < fract->j_preview_height - OUTLINE_THICKNESS; y++) {
-	    for (int x = fract->j_preview_width - OUTLINE_THICKNESS; x < fract->j_preview_width; x++) {
+	y = OUTLINE_THICKNESS;
+	while (y < fract->j_preview_height - OUTLINE_THICKNESS)
+	{
+		x = fract->j_preview_width - OUTLINE_THICKNESS;
+	    while (x < fract->j_preview_width)
+		{
 	        int offset = (y * fract->jimg.line_len) + (x * fract->jimg.bpp / 8);
 			*(unsigned int *)(fract->jimg.addr + offset) = GRAY;
+			x++;
 	    }
+		y++;
 	}
 }
 
@@ -83,7 +107,7 @@ static void toggle_julia_preview(t_fract *fract)
 			fract->fract_mode = E_MANDELBROT_JULIA_PREVIEW;
 			fract->render_func = &rend_p_mandelbrot_julia_preview;
 			if (fract->threads.is_multithread)
-				fract->render_func = &trender_progressive_julia_prev;
+				fract->render_func = &trender_progressive_julia_preview;
 			fract->threads.worker_rend_func = &worker_mandelbrot_julia_preview;
 		}
 		else
@@ -91,17 +115,9 @@ static void toggle_julia_preview(t_fract *fract)
 			fract->fract_mode = E_BURNING_JULIA_PREVIEW;
 			fract->render_func = &rend_p_burning_julia_preview;
 			if (fract->threads.is_multithread)
-				fract->render_func = &trender_progressive_julia_prev;
+				fract->render_func = &trender_progressive_julia_preview;
 			fract->threads.worker_rend_func = &worker_burning_julia_preview;
 		}
-		
-		// idx = (fract->fract_mode * NUM_COLOR_MODES) + fract->clr_mode;
-		// printf("idx: %d\n", idx);
-		// fract->render_func = fract->rend_funcs[idx];
-		// if (fract->threads.is_multithread)
-		// 	fract->render_func = &trender_progressive;
-		// fract->threads.worker_rend_func = fract->rend_funcs[idx + FUNC_BLOCK_S];
-	
 		render(fract);
 	}
 	else if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW
@@ -109,7 +125,6 @@ static void toggle_julia_preview(t_fract *fract)
 	{
 		fract->progressive_rend = fract->prev_progressive_rend;
 		fract->fract_mode = fract->prev_fract_mode;
-		// fract->render_func = fract->prev_render_func;
 
 		fract->render_func = fract->prev_render_func;
 		if (fract->threads.is_multithread)
@@ -169,6 +184,9 @@ int	key_handler(int keysym, t_fract *fract)
 
 void	toggle_progressive_renderer(t_fract *fract)
 {
+	if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW
+		|| fract->fract_mode == E_BURNING_JULIA_PREVIEW)
+		return ;
 	if (fract->progressive_rend)
 		fract->progressive_rend = 0;
 	else

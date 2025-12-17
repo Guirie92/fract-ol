@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 23:47:44 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 01:46:46 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ static void	init_vals(t_fract *fract)
 	fract->is_panning = 0;
 	fract->screenres = E_DEFAULT;
 	fract->progressive_rend = 1;
+	fract->prev_progressive_rend = 1;
 	fract->pad.panel_l_width = PANEL_L_WIDTH;
 	fract->pad.panel_l_height = PANEL_L_HEIGHT;
 	fract->pad.panel_r_width = PANEL_R_WIDTH;

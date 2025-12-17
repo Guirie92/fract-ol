@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_template_julia_preview.h                    :+:      :+:    :+:   */
+/*   render_julia_preview_template.h                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 23:01:10 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 00:39:47 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ void	REND_JULIA_PREVIEW(t_fract *fract)
 	revert_dp(fract);
 	tiles_x = (fract->j_preview_width - OUTLINE_THICKNESS + fract->ren.block_s - 1) / fract->ren.block_s;
 	RENDER_LOOP_JULIA_PREVIEW(fract, &tiles_x);
-	draw_dp(fract);
+	//draw_dp(fract);
 	mlx_put_image_to_window(fract->mlx, fract->mlx_win, fract->jimg.img,
 		fract->win_width - fract->j_preview_width,
 		fract->win_height - fract->j_preview_height);
 	fract->ren.ren_time += timing_read_current_s(&t);
-	draw_render_info(fract);
+	//draw_render_info(fract);
 }

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 21:44:25 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 23:59:45 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 01:26:54 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		progressive_tick(void *param);
 //void	progressive_reset(t_fract *fract);
 
 void	trender_progressive(t_fract *fract);
-void	trender_progressive_julia_prev(t_fract *fract);
+void	trender_progressive_julia_preview(t_fract *fract);
 
 void	render_progressive_mandelbrot(t_fract *fract);
 void	render_progressive_mandelbrot_depth(t_fract *fract);

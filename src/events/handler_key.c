@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 04:18:38 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/12 19:50:22 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 01:34:22 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 void	recenter(t_fract *fract)
 {
+	if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW
+		|| fract->fract_mode == E_BURNING_JULIA_PREVIEW)
+		return ;
 	fract->zoom = 1.0;
 	if (fract->fract_mode == E_MANDELBROT)
 		fract->sftx = -0.5;
@@ -30,6 +33,9 @@ void	recenter(t_fract *fract)
 
 void	process_step(t_fract *fract, int step_inc)
 {
+	if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW
+		|| fract->fract_mode == E_BURNING_JULIA_PREVIEW)
+		return ;
 	if (step_inc >= 0 && fract->steps <= STEPS_MAX - STEPS_INC)
 	{
 		fract->steps += STEPS_INC;
@@ -44,6 +50,9 @@ void	process_step(t_fract *fract, int step_inc)
 
 void	process_shift(t_fract *fract, double *val, double shift_amount)
 {
+	if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW
+		|| fract->fract_mode == E_BURNING_JULIA_PREVIEW)
+		return ;
 	(*val) += shift_amount;
 	render(fract);
 }

@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 19:49:36 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/16 20:36:03 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 02:16:58 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,17 @@ void	handle_threads(t_fract *fract)
 			+ fract->clr_mode + FUNC_BLOCK_S;
 		fract->threads.worker_rend_func = fract->rend_funcs[idx];
 		fract->threads.is_multithread = 1;
+		if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW)
+		{
+			fract->render_func = &trender_progressive_julia_preview;
+			fract->threads.worker_rend_func = &worker_mandelbrot_julia_preview;
+
+		}
+		else if (fract->fract_mode == E_BURNING_JULIA_PREVIEW)
+		{
+			fract->render_func = &trender_progressive_julia_preview;
+			fract->threads.worker_rend_func = &worker_burning_julia_preview;
+		}
 	}
 	else
 	{
@@ -122,6 +133,14 @@ void	handle_threads(t_fract *fract)
 		fract->render_func = fract->rend_funcs[idx];
 		fract->threads.worker_rend_func = fract->rend_funcs[idx + FUNC_BLOCK_S];
 		fract->threads.is_multithread = 0;
+		if (fract->fract_mode == E_MANDELBROT_JULIA_PREVIEW)
+		{
+			fract->render_func = &rend_p_mandelbrot_julia_preview;
+		}
+		else if (fract->fract_mode == E_BURNING_JULIA_PREVIEW)
+		{
+			fract->render_func = &rend_p_burning_julia_preview;
+		}
 	}
 	render(fract);
 }
@@ -160,5 +179,6 @@ void	switch_fractals(int keysym, int is_keypressed, t_fract *fract)
 	if (fract->threads.is_multithread)
 		fract->render_func = &trender_progressive;
 	fract->threads.worker_rend_func = fract->rend_funcs[idx + FUNC_BLOCK_S];
+	fract->progressive_rend = fract->prev_progressive_rend;
 	render(fract);
 }
