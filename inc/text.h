@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/17 02:43:50 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/17 04:35:11 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@
 # define HELP_L44 "|                                                       |"
 # define HELP_L45 "|               (J/j again to toggle off)               |"
 # define HELP_L46 "|                                                       |"
-# define HELP_L47 "|       Move cursor to preview julia in real time       |"
+# define HELP_L47 "|     Move the cursor to preview julia in real time     |"
 # define HELP_L48 "|                                                       |"
 # define HELP_L49 "|     Left click to jump to julia fractal full size     |"
 # define HELP_L50 "|                                                       |"
