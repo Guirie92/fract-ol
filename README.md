@@ -9,7 +9,7 @@ This README introduces **Fract'ol**, a high-performance fractal explorer designe
 Clone it recursively to get the minilibx submodule:
 
 ```
-git clone --recursive https://github.com/Guirie92/fract-ol.git
+git clone --recursive https://github.com/Guirie92/fract-ol.git && cd fract-ol
 ```
 
 To compile:
@@ -21,11 +21,16 @@ To execute:
 
 ```
 ./fractol <fractal_type> <julia_re> <julia_im>
-
 ```
 
 Fractal types are "mandelbrot" and "burning" (burning ship), or "julia" (mandelbrot-julia)
 type, at specified position (julia_re and julia_im).
+
+For instance:
+
+```
+./fractol mandelbrot
+```
 
 
 ## 🚀 Super Fast and Responsive: Progressive Rendering
