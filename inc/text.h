@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:42:23 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/17 04:36:47 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/18 02:00:53 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@
 # define HELP_L32 "|                                                       |"
 # define HELP_L33 "|        1/2/3  : Switch between fractals               |"
 # define HELP_L34 "|                                                       |"
-# define HELP_L35 "|        L-click: Display julia at coordinates          |"
+# define HELP_L35 "|        R-click: Display julia at coordinates          |"
 # define HELP_L36 "|                                                       |"
 # define HELP_L37 "|                                                       |"
 # define HELP_L38 "|                                                       |"
@@ -83,7 +83,7 @@
 # define HELP_L46 "|                                                       |"
 # define HELP_L47 "|     Move the cursor to preview julia in real time     |"
 # define HELP_L48 "|                                                       |"
-# define HELP_L49 "|     Left click to jump to julia fractal full size     |"
+# define HELP_L49 "|    Right click to jump to julia fractal full size     |"
 # define HELP_L50 "|                                                       |"
 # define HELP_L51 "|                                                       |"
 # define HELP_L52 "+-------------------------------------------------------+"

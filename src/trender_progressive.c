@@ -6,7 +6,7 @@
 /*   By: guillsan <guillsan@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:13:04 by guillsan          #+#    #+#             */
-/*   Updated: 2025/12/17 01:26:54 by guillsan         ###   ########.fr       */
+/*   Updated: 2025/12/18 01:24:38 by guillsan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void	trender_progressive_julia_preview(t_fract *fract)
 	fract->threads.work_ready = 0;
 	pthread_mutex_unlock(&fract->threads.pool_mutex);
 	//draw_dp(fract);
-		mlx_put_image_to_window(fract->mlx, fract->mlx_win, fract->jimg.img,
+	mlx_put_image_to_window(fract->mlx, fract->mlx_win, fract->jimg.img,
 		fract->win_width - fract->j_preview_width,
 		fract->win_height - fract->j_preview_height);
 	fract->ren.ren_time += timing_read_current_s(&t);
