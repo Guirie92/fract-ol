@@ -33,7 +33,7 @@ For instance:
 ```
 
 
-## 🚀 Super Fast and Responsive: Progressive Rendering
+## Fast and Responsive: Progressive Rendering
 
 The core goal of Fract'ol is to provide a **smooth, delay-free, 60 FPS experience** while navigating and zooming deeply into any fractal. Standard rendering can cause noticeable lag, especially when zooming or on lower-end devices. If, out of curiosity, you'd like to experience the navigation lag of implementations without progressive rendering, press the toggle **Progressive rendering (P/p)** on and off to see the difference.
 
@@ -42,7 +42,7 @@ To achieve superior performance and responsiveness, the application uses a **Pro
 1.  **Low-Resolution Start:** Upon a new movement (pan or zoom), the image is first rendered at a low resolution to give immediate visual feedback.
 2.  **Progressive Refinement:** In subsequent frames, the renderer progressively fills in the missing pixels, moving towards the full, high-resolution image.
 
-### 💡 Time-Budgeted Execution
+### Time-Budgeted Execution
 
 Most importantly, the rendering process is **time-budgeted**. Every frame, the application has a total time budget of **16 milliseconds (MS)** to maintain a smooth 60 Frames Per Second (FPS).
 
@@ -51,13 +51,13 @@ Most importantly, the rendering process is **time-budgeted**. Every frame, the a
 
 This technique ensures the application's responsiveness is prioritized. A faster CPU will complete the render job in fewer frames, while a slower device remains perfectly responsive by ensuring no single render step causes a noticeable FPS hitch.
 
-### ⚡ Multithreading Acceleration
+### Multithreading Acceleration
 
 For maximum speed, Fract'ol includes an optional **Multi-threading Mode (T/t)**. By utilizing multiple cores of your CPU, this feature speeds up the calculation process by a factor of **10 to 15 times**, allowing the progressive rendering to complete almost instantly.
 
 ---
 
-## 🕹️ Controls and Features
+## Controls and Features
 
 All controls are accessible via the in-app help panel (**H/h**).
 
@@ -81,7 +81,7 @@ All controls are accessible via the in-app help panel (**H/h**).
 * **V/v:** Toggle color depth/palette options.
 * **F/f:** Switch screen size (default, 2K, 4K).
 
-### ✨ Special Feature: Julia Live Preview
+### Special Feature: Julia Live Preview
 
 The **Julia Live Preview** is a unique feature designed to help you select your Julia constant `c`:
 
@@ -90,7 +90,7 @@ The **Julia Live Preview** is a unique feature designed to help you select your 
 * **L-click:** Once you find a Julia shape you like in the preview, simply **Left-click** on that coordinate to instantly switch the main window to that Julia fractal at full size.
 
 
-### 🔬 Core Fractals and Their Formulas
+### Core Fractals and Their Formulas
 
 Fract'ol allows you to explore the two most famous families of fractals: 
 the Mandelbrot set and the Julia sets (and Burning Ship as bonus).
