@@ -1,4 +1,4 @@
-# Fract'ol (with steroids)
+# Fract'ol (progressive rendering)
 
 This README introduces **Fract'ol**, a high-performance fractal explorer designed for smooth, responsive real-time navigation of complex mathematical sets.
 
